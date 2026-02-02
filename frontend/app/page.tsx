@@ -1,5 +1,5 @@
 export default function Home() {
-  let name = "rohan";
+  let name = "";
 
   return (
     <div>
