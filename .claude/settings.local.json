@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Notion__notion-search",
+      "mcp__Notion__notion-fetch",
+      "Bash(tree:*)",
+      "WebFetch(domain:framer.com)",
+      "Bash(test:*)"
+    ]
+  }
+}
