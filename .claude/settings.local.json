@@ -7,8 +7,7 @@
       "WebFetch(domain:framer.com)",
       "Bash(test:*)",
       "Bash(npx next build:*)",
-      "Bash(gh pr list:*)",
-      "Bash(gh pr view:*)"
+      "Bash(git push:*)"
     ]
   }
 }
