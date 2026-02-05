@@ -5,7 +5,8 @@
       "mcp__Notion__notion-fetch",
       "Bash(tree:*)",
       "WebFetch(domain:framer.com)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(npx next build:*)"
     ]
   }
 }
