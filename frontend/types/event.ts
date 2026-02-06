@@ -1,22 +1,33 @@
-// Event, Site, EventSignup, EventMetrics types
+// ============================================================================
+// EVENT TYPES
+// ============================================================================
+// Outreach events that volunteers sign up for
 
-// ============= SITES =============
+import { Site } from "./site";
 
-export type Site = {
-  id: string;
-  name: string;
-  location: string;
-  description: string;
-  contacts: string; // Contact info for the site
-  created_at: string;
+/**
+ * Capacity limits for an event
+ *
+ * - Easier to validate (all in one place)
+ * - Can reuse for capacity checks
+ * - Clear what capacity constraints exist
+ */
+export type EventCapacity = {
+  scribe: number; // Max 1 (waitlist eligible)
+  graduate: number; // Max 2-3 (waitlist eligible)
+  preceptor: number; // Max 2 (hard cap)
+  outreach_manager: number; // Max 2 (hard cap)
+  dental_student: number; // Max 2 (hard cap)
 };
 
-export type CreateSiteRequest = Omit<Site, 'id' | 'created_at'>;
-export type UpdateSiteRequest = Partial<CreateSiteRequest>;
-
-// ============= EVENTS =============
-
-export type EventCapacity = {
+/**
+ * Current signup counts for an event
+ *
+ * - Frontend needs to show "2/3 spots filled"
+ * - Backend calculates this, frontend displays it
+ * - Separate from capacity (capacity = max, current = actual)
+ */
+export type EventSignupCounts = {
   scribe: number;
   graduate: number;
   preceptor: number;
@@ -24,63 +35,68 @@ export type EventCapacity = {
   dental_student: number;
 };
 
+/**
+ * Complete event object
+ *
+ * - site_id: Foreign key (string UUID) stored in database
+ * - site: Full Site object when you JOIN tables
+ * - Backend can return either (with/without JOIN)
+ * - Makes site optional so both work
+ */
 export type Event = {
   id: string;
+  site_id: string; // Foreign key to sites table
+  site?: Site; // Full site object (if joined)
+  title: string; // e.g., "St. Vincent Week 3"
+  description?: string; // Special notes/requirements
+  start_time: string; // ISO timestamp
+  end_time: string; // ISO timestamp
+  capacity: EventCapacity; // Max volunteers per role
+  current_signups?: EventSignupCounts; // How many signed up (calculated)
+  created_at: string;
+  updated_at: string;
+};
+
+/**
+ * Data to create a new event (admin only)
+ *
+ * WHY NO current_signups?
+ * - That's calculated by the backend
+ * - When creating, signups = 0 for everything
+ */
+export type CreateEventData = {
   site_id: string;
-  date: string; // ISO datetime string
+  title: string;
+  description?: string;
+  start_time: string; // Frontend will convert Date to ISO
+  end_time: string;
   capacity: EventCapacity;
-  description: string;
-  created_at: string;
 };
 
-// Event with site data joined (for detail views)
-export type EventWithSite = Event & {
-  site: Site;
+/**
+ * Data to update an event (admin only)
+ */
+export type UpdateEventData = {
+  site_id?: string;
+  title?: string;
+  description?: string;
+  start_time?: string;
+  end_time?: string;
+  capacity?: EventCapacity;
 };
 
-export type CreateEventRequest = Omit<Event, 'id' | 'created_at'>;
-export type UpdateEventRequest = Partial<CreateEventRequest>;
-
-// ============= EVENT SIGNUPS =============
-
-export type SignupStatus = 'confirmed' | 'waitlisted' | 'cancelled';
-
-export type EventSignup = {
+/**
+ * Event list item (lighter version for lists)
+ *
+ * - List views don't need ALL event details
+ * - Lighter payload = faster loading
+ * - Backend can return simplified version
+ */
+export type EventListItem = {
   id: string;
-  event_id: string;
-  user_id: string;
-  role: 'scribe' | 'graduate' | 'preceptor' | 'outreach_manager' | 'dental_student';
-  status: SignupStatus;
-  created_at: string;
-  updated_at: string;
+  title: string;
+  site_name: string; // Just the name, not full object
+  start_time: string;
+  end_time: string;
+  available_spots: number; // Total spots remaining
 };
-
-// Signup with event details (for user dashboard)
-export type EventSignupWithEvent = EventSignup & {
-  event: Event;
-};
-
-export type CreateSignupRequest = {
-  event_id: string;
-  role: EventSignup['role'];
-};
-
-export type UpdateSignupRequest = {
-  status?: SignupStatus;
-};
-
-// ============= EVENT METRICS =============
-
-export type EventMetrics = {
-  id: string;
-  event_id: string;
-  people_served: number;
-  grad_students_attended: number;
-  total_service_hours: number; // grad_students × event_length
-  notes?: string;
-  created_at: string;
-  updated_at: string;
-};
-
-export type CreateMetricsRequest = Omit<EventMetrics, 'id' | 'created_at' | 'updated_at'>;
-export type UpdateMetricsRequest = Partial<CreateMetricsRequest>;
