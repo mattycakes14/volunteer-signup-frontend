@@ -1,71 +1,146 @@
+/* ── Two-panel auth layout ─────────────────────────────── */
+
 .auth-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.auth-container {
-  width: 100%;
-  max-width: 440px;
   padding: 24px;
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.auth-card {
-  background: linear-gradient(145deg, #2a2a2a, #222);
+.auth-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 960px;
+  min-height: 580px;
   border-radius: 24px;
-  padding: 40px 32px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.4),
-    0 16px 40px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   animation: slideUp 0.5s ease-out;
 }
 
+/* ── Left panel (form) ────────────────────────────────── */
+
+.auth-form-panel {
+  flex: 1;
+  background: #ffffff;
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+}
+
 .auth-header {
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .auth-header h1 {
-  color: #fff;
+  color: #000;
   font-size: 28px;
   font-weight: 700;
+  letter-spacing: 1.5px;
   margin: 0 0 8px 0;
+  text-transform: uppercase;
 }
 
 .auth-header p {
-  color: #888;
+  color: #555;
   font-size: 14px;
   margin: 0;
 }
 
+/* ── Right panel (image / color placeholder) ──────────── */
+
+.auth-image-panel {
+  flex: 1;
+  background: linear-gradient(135deg, #6c3dd1 0%, #5028c6 50%, #3a1aab 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-image-panel::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  transform: rotate(12deg);
+}
+
+.auth-image-panel::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+}
+
+.image-placeholder-text {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  font-weight: 500;
+  z-index: 1;
+}
+
+/* ── Decorative circles (matching the reference design) ─ */
+
+.decor-circle {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.decor-circle--top-left {
+  width: 80px;
+  height: 80px;
+  background: #5028c6;
+  top: -20px;
+  left: -20px;
+  opacity: 0.6;
+}
+
+.decor-circle--bottom-right {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  bottom: -15px;
+  right: -15px;
+}
+
+/* ── Form styles ──────────────────────────────────────── */
+
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
+}
+
+.form-row {
+  display: flex;
+  gap: 14px;
+}
+
+.form-row .input-group {
+  flex: 1;
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .input-group label {
-  color: #ccc;
-  font-size: 14px;
+  color: #000;
+  font-size: 13px;
   font-weight: 500;
 }
 
@@ -73,38 +148,48 @@
   position: relative;
   display: flex;
   align-items: center;
-  background-color: #1a1a1a;
-  border: 1px solid #3a3a3a;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
   border-radius: 10px;
   transition: border-color 0.2s;
 }
 
 .input-wrapper:focus-within {
-  border-color: #4ade80;
+  border-color: #5028c6;
 }
 
 .input-icon {
   position: absolute;
   left: 12px;
-  width: 18px;
-  height: 18px;
-  color: #666;
+  width: 16px;
+  height: 16px;
+  color: #999;
   pointer-events: none;
 }
 
-.input-wrapper input {
+.input-wrapper input,
+.input-wrapper select {
   width: 100%;
-  padding: 12px 12px 12px 40px;
+  padding: 11px 12px 11px 38px;
   background: transparent;
   border: none;
   outline: none;
-  color: #fff;
+  color: #000;
   font-size: 14px;
+  font-family: inherit;
 }
 
-.input-wrapper input::placeholder {
-  color: #555;
+.input-wrapper select {
+  cursor: pointer;
+  appearance: none;
 }
+
+.input-wrapper input::placeholder,
+.input-wrapper select option[value=""] {
+  color: #aaa;
+}
+
+/* ── Password toggle ──────────────────────────────────── */
 
 .toggle-password {
   position: absolute;
@@ -126,35 +211,39 @@
 }
 
 .toggle-password svg {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
+
+/* ── Submit button ────────────────────────────────────── */
 
 .submit-button {
   width: 100%;
-  padding: 12px;
-  background-color: #4ade80;
-  color: #111;
+  padding: 13px;
+  background-color: #5028c6;
+  color: #fff;
   font-size: 15px;
   font-weight: 600;
   border: none;
-  border-radius: 10px;
+  border-radius: 300px;
   cursor: pointer;
   transition: background-color 0.2s;
   margin-top: 4px;
 }
 
 .submit-button:hover {
-  background-color: #3fcf71;
+  background-color: #3f1eaa;
 }
 
 .submit-button:active {
-  background-color: #35b862;
+  background-color: #331891;
 }
+
+/* ── Toggle login ↔ signup ────────────────────────────── */
 
 .toggle-mode {
   text-align: center;
-  color: #888;
+  color: #555;
   font-size: 14px;
   margin: 0;
 }
@@ -162,15 +251,51 @@
 .toggle-mode-button {
   background: none;
   border: none;
-  color: #4ade80;
+  color: #5028c6;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   padding: 0;
   transition: color 0.2s;
 }
 
 .toggle-mode-button:hover {
-  color: #3fcf71;
+  color: #3f1eaa;
   text-decoration: underline;
+}
+
+/* ── Animation ────────────────────────────────────────── */
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Responsive: stack on small screens ───────────────── */
+
+@media (max-width: 720px) {
+  .auth-wrapper {
+    flex-direction: column;
+    max-width: 480px;
+  }
+
+  .auth-image-panel {
+    min-height: 180px;
+    order: -1;
+  }
+
+  .auth-form-panel {
+    padding: 32px 24px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 18px;
+  }
 }

@@ -11,7 +11,11 @@
       "Bash(wc:*)",
       "Bash(ls:*)",
       "Bash(git ls-tree:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(git stash:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash pop:*)",
+      "Bash(git add:*)"
     ]
   }
 }
