@@ -9,7 +9,9 @@
       "Bash(npx next build:*)",
       "Bash(git push:*)",
       "Bash(wc:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(npm install:*)"
     ]
   }
 }
