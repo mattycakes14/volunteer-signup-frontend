@@ -34,7 +34,7 @@ export default function LoginForm({ onToggle }: LoginFormProps) {
             required
             placeholder="Enter your email"
           />
-          </div>
+        </div>
       </div>
 
       <div className="input-group">
