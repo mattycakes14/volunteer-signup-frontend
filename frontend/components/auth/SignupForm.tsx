@@ -1,8 +1,8 @@
-// Signup form — email (@uw.edu validation), password, name, role
+// Signup form — email (@uw.edu validation), password, name, role, phone, year, major
 "use client";
 
 import React, { useState } from "react";
-import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
+import { Eye, EyeOff, Lock, Mail, User, Phone, GraduationCap, BookOpen } from "lucide-react";
 import Button from "@/components/Button";
 import { signUp } from "@/lib/auth";
 import { useRouter } from "next/navigation";
@@ -19,6 +19,9 @@ export default function SignupForm({ onToggle }: SignupFormProps) {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [role, setRole] = useState<UserRole>(UserRole.UNDERGRAD);
+  const [phone, setPhone] = useState("");
+  const [year, setYear] = useState("");
+  const [major, setMajor] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -35,7 +38,15 @@ export default function SignupForm({ onToggle }: SignupFormProps) {
     }
 
     try {
-      await signUp({ email, password, name, role });
+      await signUp({
+        email,
+        password,
+        name,
+        role,
+        phone,
+        year,
+        major,
+      });
       router.push(ROUTES.DASHBOARD);
     } catch (error) {
       setError(error instanceof Error ? error.message : "Sign up failed");
@@ -100,21 +111,75 @@ export default function SignupForm({ onToggle }: SignupFormProps) {
 
       <div className="input-group">
         <label htmlFor="signup-role">Role</label>
-        <select
-          id="signup-role"
-          value={role}
-          onChange={(e) => setRole(e.target.value as UserRole)}
-          required
-        >
-          <option value={UserRole.UNDERGRAD}>Undergraduate</option>
-          <option value={UserRole.GRADUATE}>Graduate Student</option>
-        </select>
+        <div className="input-wrapper">
+          <GraduationCap className="input-icon" />
+          <select
+            id="signup-role"
+            value={role}
+            onChange={(e) => setRole(e.target.value as UserRole)}
+            required
+          >
+            <option value={UserRole.UNDERGRAD}>Undergraduate</option>
+            <option value={UserRole.GRADUATE}>Graduate Student</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="form-row">
+        <div className="input-group">
+          <label htmlFor="signup-phone">Phone</label>
+          <div className="input-wrapper">
+            <Phone className="input-icon" />
+            <input
+              id="signup-phone"
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="(206) 555-0123"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="signup-year">Year</label>
+          <div className="input-wrapper">
+            <BookOpen className="input-icon" />
+            <select
+              id="signup-year"
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+              required
+            >
+              <option value="">Select year</option>
+              <option value="Freshman">Freshman</option>
+              <option value="Sophomore">Sophomore</option>
+              <option value="Junior">Junior</option>
+              <option value="Senior">Senior</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div className="input-group">
+        <label htmlFor="signup-major">Major</label>
+        <div className="input-wrapper">
+          <GraduationCap className="input-icon" />
+          <input
+            id="signup-major"
+            type="text"
+            value={major}
+            onChange={(e) => setMajor(e.target.value)}
+            placeholder="e.g. Biology, Nursing"
+            required
+          />
+        </div>
       </div>
 
       {error && <p className="error-message">{error}</p>}
 
       <Button type="submit" className="submit-button" disabled={isLoading}>
-        {isLoading ? "Signing up..." : "Sign up"}
+        {isLoading ? "Signing up..." : "Create Account"}
       </Button>
 
       <p className="toggle-mode">

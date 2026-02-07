@@ -34,9 +34,9 @@ export type User = {
   email: string; // Must be @uw.edu
   name: string;
   role: UserRole;
-  phone?: string; // Optional: for SMS notifications
-  year?: string; // e.g., "Junior", "1st year grad"
-  major?: string; // e.g., "Biology"
+  phone: string; // For SMS notifications
+  year: string; // e.g., "Junior", "1st year grad"
+  major: string; // e.g., "Biology"
   created_at: string; // ISO timestamp
   updated_at: string; // ISO timestamp
 };
@@ -54,9 +54,9 @@ export type CreateUserData = {
   password: string; // Only needed at creation (Supabase hashes it)
   name: string;
   role: UserRole;
-  phone?: string;
-  year?: string;
-  major?: string;
+  phone: string;
+  year: string;
+  major: string;
 };
 
 /**

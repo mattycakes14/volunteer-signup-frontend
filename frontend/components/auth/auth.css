@@ -1,4 +1,4 @@
-/* ── Two-panel auth layout ─────────────────────────────── */
+
 
 .auth-page {
   min-height: 100vh;
@@ -6,17 +6,22 @@
   align-items: center;
   justify-content: center;
   padding: 24px;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
 }
 
 .auth-wrapper {
   display: flex;
   width: 100%;
-  max-width: 960px;
-  min-height: 580px;
+  max-width: 1040px;
+  min-height: 600px;
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   animation: slideUp 0.5s ease-out;
+  position: relative;
+  z-index: 1;
 }
 
 /* ── Left panel (form) ────────────────────────────────── */
@@ -29,6 +34,7 @@
   flex-direction: column;
   justify-content: center;
   overflow-y: auto;
+  max-height: 90vh;
 }
 
 .auth-header {
@@ -50,11 +56,11 @@
   margin: 0;
 }
 
-/* ── Right panel (image / color placeholder) ──────────── */
+/* ── Right panel (decorative) ─────────────────────────── */
 
 .auth-image-panel {
   flex: 1;
-  background: linear-gradient(135deg, #6c3dd1 0%, #5028c6 50%, #3a1aab 100%);
+  background: linear-gradient(135deg, #7c4dff 0%, #6c3dd1 30%, #5028c6 60%, #3a1aab 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,35 +68,65 @@
   overflow: hidden;
 }
 
-.auth-image-panel::before {
-  content: "";
+/* Wavy decorative curves */
+.panel-wave {
   position: absolute;
-  width: 300px;
-  height: 300px;
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  transform: rotate(12deg);
-}
-
-.auth-image-panel::after {
-  content: "";
-  position: absolute;
-  bottom: -40px;
-  right: -40px;
-  width: 120px;
-  height: 120px;
-  background: rgba(255, 255, 255, 0.08);
   border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.image-placeholder-text {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 16px;
-  font-weight: 500;
+.panel-wave--1 {
+  width: 500px;
+  height: 500px;
+  top: -120px;
+  right: -100px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.panel-wave--2 {
+  width: 350px;
+  height: 350px;
+  bottom: -80px;
+  left: -60px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.panel-wave--3 {
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.05);
+  border-width: 1px;
+}
+
+/* Glassmorphism card */
+.glass-card {
+  width: 260px;
+  height: 320px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 1;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-/* ── Decorative circles (matching the reference design) ─ */
+.glass-card-text {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  padding: 24px;
+  line-height: 1.4;
+}
+
+/* ── Decorative circles (background, behind wrapper) ──── */
 
 .decor-circle {
   position: absolute;
@@ -99,20 +135,20 @@
 }
 
 .decor-circle--top-left {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   background: #5028c6;
-  top: -20px;
-  left: -20px;
-  opacity: 0.6;
+  top: -25px;
+  left: -25px;
+  opacity: 0.5;
 }
 
 .decor-circle--bottom-right {
-  width: 60px;
-  height: 60px;
-  background: rgba(255, 255, 255, 0.2);
-  bottom: -15px;
-  right: -15px;
+  width: 80px;
+  height: 80px;
+  background: rgba(200, 200, 200, 0.3);
+  bottom: -20px;
+  right: -20px;
 }
 
 /* ── Form styles ──────────────────────────────────────── */
@@ -120,7 +156,7 @@
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
 }
 
 .form-row {
@@ -135,7 +171,7 @@
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .input-group label {
@@ -144,18 +180,24 @@
   font-weight: 500;
 }
 
+.optional-label {
+  color: #aaa;
+  font-weight: 400;
+}
+
 .input-wrapper {
   position: relative;
   display: flex;
   align-items: center;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
+  background-color: #f8f8fa;
+  border: 1px solid #e0e0e0;
   border-radius: 10px;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, background-color 0.2s;
 }
 
 .input-wrapper:focus-within {
   border-color: #5028c6;
+  background-color: #fff;
 }
 
 .input-icon {
@@ -215,11 +257,24 @@
   height: 16px;
 }
 
+/* ── Error message ────────────────────────────────────── */
+
+.error-message {
+  color: #dc3545;
+  font-size: 13px;
+  margin: 0;
+  padding: 8px 12px;
+  background: #fff5f5;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+}
+
 /* ── Submit button ────────────────────────────────────── */
 
 .submit-button {
-  width: 100%;
-  padding: 13px;
+  width: auto;
+  margin: 4px auto 0;
+  padding: 12px 48px;
   background-color: #5028c6;
   color: #fff;
   font-size: 15px;
@@ -227,19 +282,26 @@
   border: none;
   border-radius: 300px;
   cursor: pointer;
-  transition: background-color 0.2s;
-  margin-top: 4px;
+  transition: background-color 0.2s, transform 0.1s;
 }
 
 .submit-button:hover {
   background-color: #3f1eaa;
+  transform: translateY(-1px);
 }
 
 .submit-button:active {
   background-color: #331891;
+  transform: translateY(0);
 }
 
-/* ── Toggle login ↔ signup ────────────────────────────── */
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Toggle login / signup ────────────────────────────── */
 
 .toggle-mode {
   text-align: center;
@@ -286,8 +348,18 @@
   }
 
   .auth-image-panel {
-    min-height: 180px;
+    min-height: 160px;
     order: -1;
+  }
+
+  .glass-card {
+    width: 180px;
+    height: 100px;
+  }
+
+  .glass-card-text {
+    font-size: 14px;
+    padding: 12px;
   }
 
   .auth-form-panel {
@@ -296,6 +368,6 @@
 
   .form-row {
     flex-direction: column;
-    gap: 18px;
+    gap: 16px;
   }
 }
