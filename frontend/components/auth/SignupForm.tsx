@@ -43,7 +43,7 @@ export default function SignupForm({ onToggle }: SignupFormProps) {
         password,
         name,
         role,
-        phone,
+        phone_number: phone,
         year,
         major,
       });
