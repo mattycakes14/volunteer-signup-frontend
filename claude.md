@@ -83,39 +83,63 @@ A separate web portal that does two things:
 - Enforce `@uw.edu` email domain for volunteers
 
 ### Auth Workflow
-- User creates account → receives Access Token + Refresh Token (stored in localStorage)
+- User creates account via FastAPI → receives Access Token + Refresh Token (stored in localStorage)
 - Access token is short-lived; refresh token fetches a new access token before it expires
 - API requests carry the access token, verified in FastAPI via JWT (Supabase key)
 
 ```
-The Flow
+The Flow (Signup/Login)
 
 ┌─────────────┐         ┌─────────────┐         ┌─────────────┐
-│   Next.js   │         │  Supabase   │         │   FastAPI   │
-│  Frontend   │         │    Auth     │         │   Backend   │
+│   Next.js   │         │   FastAPI   │         │  Supabase   │
+│  Frontend   │         │   Backend   │         │  Auth + DB  │
 └──────┬──────┘         └──────┬──────┘         └──────┬──────┘
        │                       │                       │
-       │  1. signup/login      │                       │
+       │  1. POST /auth/signup │                       │
        │──────────────────────>│                       │
+       │   {email, password,   │                       │
+       │    name, role, etc.}  │                       │
        │                       │                       │
-       │                       │  2. Creates auth.users│
-       │                       │     Trigger fires     │
-       │                       │     → public.users    │
+       │                       │  2. Create auth.users │
+       │                       │──────────────────────>│
        │                       │                       │
-       │  3. Returns JWT       │                       │
-       │   (signed by Supabase)│                       │
+       │                       │  3. Returns session   │
+       │                       │<──────────────────────│
+       │                       │                       │
+       │                       │  4. Create public.users in PostgreSQL
+       │                       │     (if fails → delete auth.users)
+       │                       │                       │
+       │  5. Returns:          │                       │
+       │   {access_token,      │                       │
+       │    refresh_token,     │                       │
+       │    user_id, email}    │                       │
        │<──────────────────────│                       │
        │                       │                       │
-       │  4. API request + JWT │                       │
-       │───────────────────────────────────────────────>│
-       │                       │                       │
-       │                       │      5. Validates JWT │
-       │                       │         (using        │
-       │                       │      Supabase secret) │
-       │                       │                       │
-       │  6. Response          │                       │
-       │<───────────────────────────────────────────────│
+
+Subsequent API Requests:
+
+┌─────────────┐         ┌─────────────┐
+│   Next.js   │         │   FastAPI   │
+│  Frontend   │         │   Backend   │
+└──────┬──────┘         └──────┬──────┘
+       │                       │
+       │  API request + JWT    │
+       │──────────────────────>│
+       │   (Authorization:     │
+       │    Bearer <token>)    │
+       │                       │
+       │                       │  Validates JWT using
+       │                       │  Supabase secret key
+       │                       │
+       │  Response             │
+       │<──────────────────────│
 ```
+
+**Key Points:**
+- Frontend calls FastAPI routes (NOT Supabase directly)
+- FastAPI handles both Supabase auth AND PostgreSQL user creation
+- Atomic transaction: if public.users creation fails, auth.users is rolled back
+- `@uw.edu` validation enforced server-side in FastAPI
 
 ---
 
