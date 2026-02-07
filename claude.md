@@ -87,6 +87,12 @@ A separate web portal that does two things:
 - Access token is short-lived; refresh token fetches a new access token before it expires
 - API requests carry the access token, verified in FastAPI via JWT (Supabase key)
 
+**⚠️ SECURITY NOTE:**
+- localStorage is a **TEMPORARY** implementation for development
+- **Production TODO:** Migrate to httpOnly cookies to prevent XSS token theft
+- localStorage is vulnerable to JavaScript injection attacks
+- httpOnly cookies cannot be accessed by JavaScript, providing better security
+
 ```
 The Flow (Signup/Login)
 
@@ -140,6 +146,13 @@ Subsequent API Requests:
 - FastAPI handles both Supabase auth AND PostgreSQL user creation
 - Atomic transaction: if public.users creation fails, auth.users is rolled back
 - `@uw.edu` validation enforced server-side in FastAPI
+
+### Route Protection
+- **Client-side session guarding** is used instead of Next.js middleware
+- Protected pages/components check for valid session on the browser side
+- If session is invalid or expired, user is redirected to login page
+- Session validation happens via `getSession()` or similar Supabase client methods
+- This approach provides immediate feedback and keeps auth logic in components
 
 ---
 

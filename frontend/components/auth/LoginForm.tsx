@@ -4,20 +4,34 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import Button from "@/components/Button";
+import { signIn } from "@/lib/auth";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@/lib/routes";
 
 interface LoginFormProps {
   onToggle: () => void;
 }
 
 export default function LoginForm({ onToggle }: LoginFormProps) {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
-  function handleSubmit(event: React.FormEvent) {
+  async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    console.log("Login attempt:", { email, password });
-    // TODO: Add Supabase signIn here
+    setIsLoading(true);
+    try {
+      const res = await signIn(email, password);
+      router.push(ROUTES.DASHBOARD);
+    } catch (error) {
+      console.log("sign in attemp failed");
+      setError(error instanceof Error ? error : new Error("sign in failed"));
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -34,7 +48,7 @@ export default function LoginForm({ onToggle }: LoginFormProps) {
             required
             placeholder="Enter your email"
           />
-          </div>
+        </div>
       </div>
 
       <div className="input-group">
@@ -59,8 +73,10 @@ export default function LoginForm({ onToggle }: LoginFormProps) {
         </div>
       </div>
 
-      <Button type="submit" className="submit-button">
-        Sign in
+      {error && <p className="error-message">{error.message}</p>}
+
+      <Button type="submit" className="submit-button" disabled={isLoading}>
+        {isLoading ? "Signing in..." : "Sign in"}
       </Button>
 
       <p className="toggle-mode">
