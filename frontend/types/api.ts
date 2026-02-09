@@ -3,8 +3,6 @@
 // ============================================================================
 // Standardized responses from your FastAPI backend
 
-import { User } from './user';
-
 /**
  * Generic API response wrapper
  *
@@ -38,37 +36,29 @@ export type PaginatedResponse<T> = {
 };
 
 /**
- * Auth response (signup/signin)
+ * Auth response (signup/signin/refresh)
  *
- * WHY THESE FIELDS?
- * - access_token: Short-lived JWT (15 min)
- * - refresh_token: Long-lived token to get new access_token
- * - user: Full user object so frontend knows who logged in
- *
- * WHERE TO STORE?
- * - localStorage (we'll handle this in auth.ts later)
+ * Matches backend AuthResponse schema:
+ * - access_token/refresh_token: may be null until email is verified
+ * - user_id: UUID of the authenticated user
+ * - email: user's email
+ * - email_verified: whether email has been verified
  */
 export type AuthResponse = {
-  success: boolean;
   access_token?: string;
   refresh_token?: string;
-  user?: User;
-  error?: string;
+  user_id: string;
+  email: string;
+  email_verified: boolean;
 };
 
 /**
  * Token refresh response
  *
- * WHY SEPARATE FROM AuthResponse?
- * - Refresh only returns new access_token
- * - Doesn't return user (you already have it)
- * - Smaller payload
+ * Backend uses the same AuthResponse schema for refresh,
+ * so this is identical to AuthResponse.
  */
-export type RefreshResponse = {
-  success: boolean;
-  access_token?: string;
-  error?: string;
-};
+export type RefreshResponse = AuthResponse;
 
 /**
  * Error response format

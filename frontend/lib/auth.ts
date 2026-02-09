@@ -1,6 +1,5 @@
 import {
   type CreateUserData,
-  type User,
   type AuthResponse,
   type RefreshResponse,
 } from "@/types";
@@ -26,14 +25,21 @@ function getTokens() {
 function clearTokens() {
   localStorage.removeItem("access_token");
   localStorage.removeItem("refresh_token");
-  localStorage.removeItem("user");
+  localStorage.removeItem("user_id");
+  localStorage.removeItem("email");
 }
 
 // ============================================================================
 // AUTH FUNCTIONS
 // ============================================================================
 
-export async function signUp(data: CreateUserData): Promise<User> {
+/**
+ * Sign up a new user.
+ *
+ * Backend AuthResponse returns: access_token, refresh_token, user_id, email, email_verified.
+ * Tokens may be null if email is not yet verified.
+ */
+export async function signUp(data: CreateUserData): Promise<AuthResponse> {
   if (!data.email.endsWith("@uw.edu")) {
     throw new Error("Email must be a @uw.edu address");
   }
@@ -56,14 +62,14 @@ export async function signUp(data: CreateUserData): Promise<User> {
 
     const authData: AuthResponse = await res.json();
 
-    if (!authData.access_token || !authData.refresh_token || !authData.user) {
-      throw new Error("Invalid response from server");
+    if (authData.access_token && authData.refresh_token) {
+      setTokens(authData.access_token, authData.refresh_token);
     }
 
-    setTokens(authData.access_token, authData.refresh_token);
-    localStorage.setItem("user", JSON.stringify(authData.user));
+    localStorage.setItem("user_id", authData.user_id);
+    localStorage.setItem("email", authData.email);
 
-    return authData.user;
+    return authData;
   } catch (error) {
     if (error instanceof Error) {
       throw error;
@@ -72,7 +78,7 @@ export async function signUp(data: CreateUserData): Promise<User> {
   }
 }
 
-export async function signIn(email: string, password: string): Promise<User> {
+export async function signIn(email: string, password: string): Promise<AuthResponse> {
   try {
     const res = await fetch(`${API_URL}/auth/signin`, {
       method: "POST",
@@ -90,14 +96,14 @@ export async function signIn(email: string, password: string): Promise<User> {
 
     const authData: AuthResponse = await res.json();
 
-    if (!authData.access_token || !authData.refresh_token || !authData.user) {
-      throw new Error("Invalid response from server");
+    if (authData.access_token && authData.refresh_token) {
+      setTokens(authData.access_token, authData.refresh_token);
     }
 
-    setTokens(authData.access_token, authData.refresh_token);
-    localStorage.setItem("user", JSON.stringify(authData.user));
+    localStorage.setItem("user_id", authData.user_id);
+    localStorage.setItem("email", authData.email);
 
-    return authData.user;
+    return authData;
   } catch (error) {
     if (error instanceof Error) {
       throw error;
@@ -155,20 +161,20 @@ export function getAccessToken(): string | null {
 
 export function getSession() {
   const { access, refresh } = getTokens();
-  const userStr = localStorage.getItem("user");
+  const userId = localStorage.getItem("user_id");
 
-  if (!access || !refresh || !userStr) {
+  if (!access || !refresh || !userId) {
     return null;
   }
 
   return {
     access_token: access,
     refresh_token: refresh,
-    user: JSON.parse(userStr) as User,
+    user_id: userId,
+    email: localStorage.getItem("email"),
   };
 }
 
-export function getUser(): User | null {
-  const userStr = localStorage.getItem("user");
-  return userStr ? JSON.parse(userStr) : null;
+export function getUserId(): string | null {
+  return localStorage.getItem("user_id");
 }

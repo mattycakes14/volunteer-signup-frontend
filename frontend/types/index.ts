@@ -28,17 +28,16 @@ export {
 // Event types
 export {
   type Event,
-  type EventCapacity,
-  type EventSignupCounts,
+  type EventWithDetails,
   type CreateEventData,
-  type UpdateEventData,
-  type EventListItem
+  type UpdateEventData
 } from './event';
 
 // Event signup types
 export {
   SignupStatus,
   type EventSignup,
+  type SignupWithDetails,
   type CreateSignupData,
   type UpdateSignupData,
   type SignupWithEvent
@@ -47,6 +46,7 @@ export {
 // Event metrics types
 export {
   type EventMetrics,
+  type EventMetricsWithEvent,
   type CreateMetricsData,
   type UpdateMetricsData
 } from './event-metrics';
