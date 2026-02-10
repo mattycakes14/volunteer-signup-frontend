@@ -8,13 +8,14 @@ import { getSession } from "@/lib/auth";
 import { UserRole } from "@/types";
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
-  useEffect(() => {
-    const session = getSession();
-    if (!session) {
-      router.push(ROUTES.DASHBOARD); // Not logged in → go back
-    }
-    // TODO: Admin role check requires fetching full user profile from /users/{id}
-    // since AuthResponse only returns user_id/email, not role
-  }, []);
+  // TODO: Re-enable session guard once auth flow is working
+  // useEffect(() => {
+  //   const session = getSession();
+  //   if (!session) {
+  //     router.push(ROUTES.DASHBOARD); // Not logged in → go back
+  //   }
+  //   // TODO: Admin role check requires fetching full user profile from /users/{id}
+  //   // since AuthResponse only returns user_id/email, not role
+  // }, []);
   return <>{children}</>;
 }

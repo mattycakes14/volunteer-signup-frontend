@@ -12,14 +12,20 @@
   --accent: #4ade80;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background: linear-gradient(                                                                
-    180deg,      
-    #f5eef8 0%,                                                                               
-    #f0e0ef 50%,                                                                              
-    hsl(267, 50%, 85%) 100%                                                                              
+  background: linear-gradient(
+    180deg,
+    #f5eef8 0%,
+    #f0e0ef 50%,
+    hsl(267, 50%, 85%) 100%
   );
   min-height: 100vh;
   color: var(--foreground);
-  font-family: 'Satoshi', sans-serif;;
+  font-family: 'Satoshi', sans-serif;
 }
