@@ -6,20 +6,20 @@ import { getSession } from "@/lib/auth";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/lib/routes";
 import { useEffect } from "react";
-
+import Sidebar from "@/components/layout/Sidebar";
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
-  useEffect(() => {
-    const userData = getSession();
+  // useEffect(() => {
+  //   const userData = getSession();
 
-    if (!userData) {
-      router.push(ROUTES.HOME);
-    }
-  }, []);
+  //   if (!userData) {
+  //     router.push(ROUTES.HOME);
+  //   }
+  // }, []);
   return (
-    <div className="flex h-screen">
-      {/* <Sidebar /> — Phase 2 */}
-      <main className="flex-1">{children}</main>
+    <div>
+      <Sidebar />
+      <main>{children}</main>
     </div>
   );
 }

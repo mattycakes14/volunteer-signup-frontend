@@ -1,0 +1,67 @@
+.sideBarWrapper {
+  position: relative;
+  display: flex;
+}
+
+.sideBarContainer {
+  background-color: white;
+  width: 60px;
+  min-height: 100vh;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: width 0.3s ease;
+}
+
+.sideBarContainer:hover {
+  width: 220px;
+}
+
+.sideBarTag {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 50px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.sideBarContainer:hover .sideBarTag {
+  opacity: 1;
+}
+
+.sideBarList {
+  padding-left: 20px;
+}
+
+.sideBarList div {
+  margin-bottom: 20px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.toggleOff {
+  display: none;
+}
+
+.smallText {
+  display: flex;
+  color: #5028c6;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 500;
+}
+
+.dashboardIcons {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.navLabel {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.sideBarContainer:hover .navLabel {
+  opacity: 1;
+}

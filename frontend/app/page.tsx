@@ -8,14 +8,15 @@ import { ROUTES } from "@/lib/routes";
 export default function Home() {
   const router = useRouter();
 
-  useEffect(() => {
-    const session = getSession();
-    if (session) {
-      router.push(ROUTES.DASHBOARD);
-    } else {
-      router.push(ROUTES.LOGIN);
-    }
-  }, []);
+  // TODO: Re-enable session guard once auth flow is working
+  // useEffect(() => {
+  //   const session = getSession();
+  //   if (session) {
+  //     router.push(ROUTES.DASHBOARD);
+  //   } else {
+  //     router.push(ROUTES.LOGIN);
+  //   }
+  // }, []);
 
   return null;
 }

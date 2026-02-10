@@ -43,7 +43,7 @@ export default function SignupForm({ onToggle }: SignupFormProps) {
         password,
         name,
         role,
-        phone,
+        phone_number: phone,
         year,
         major,
       });
@@ -120,7 +120,7 @@ export default function SignupForm({ onToggle }: SignupFormProps) {
             required
           >
             <option value={UserRole.UNDERGRAD}>Undergraduate</option>
-            <option value={UserRole.GRADUATE}>Graduate Student</option>
+            <option value={UserRole.GRAD}>Graduate Student</option>
           </select>
         </div>
       </div>
