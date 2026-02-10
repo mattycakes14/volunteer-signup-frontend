@@ -36,6 +36,7 @@
 .sideBarList div {
   margin-bottom: 20px;
   align-items: center;
+  cursor: pointer;
 }
 
 .toggleOff {
