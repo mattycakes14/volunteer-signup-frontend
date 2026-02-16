@@ -81,6 +81,50 @@ frontend/
 
 ---
 
+## How Route Groups Map to URLs
+
+Parenthesized folders like `(auth)` and `(dashboard)` are **route groups** — they organize files but are invisible in the URL.
+
+```
+File path                                    → URL
+─────────────────────────────────────────────────────────
+app/page.tsx                                 → /
+app/(auth)/login/page.tsx                    → /login
+app/(auth)/signup/page.tsx                   → /signup
+app/(dashboard)/dashboard/page.tsx           → /dashboard
+app/(dashboard)/events/page.tsx              → /events
+app/(dashboard)/events/[id]/page.tsx         → /events/:id
+app/(dashboard)/history/page.tsx             → /history
+app/(dashboard)/admin/events/page.tsx        → /admin/events
+app/(dashboard)/admin/sites/page.tsx         → /admin/sites
+app/(dashboard)/admin/archive/page.tsx       → /admin/archive
+```
+
+### Layout nesting order
+
+When you visit `/dashboard`, Next.js wraps layouts top-down:
+```
+RootLayout (app/layout.tsx)
+  → DashboardLayout (app/(dashboard)/layout.tsx — Sidebar lives here)
+    → DashboardPage (app/(dashboard)/dashboard/page.tsx)
+```
+
+Admin pages get an extra layer:
+```
+RootLayout
+  → DashboardLayout (Sidebar)
+    → AdminLayout (role guard)
+      → AdminPage
+```
+
+Auth pages skip the dashboard layout entirely:
+```
+RootLayout
+  → LoginPage or SignupPage (no sidebar)
+```
+
+---
+
 ## Phase Breakdown
 
 ### Phase 0 — Fix Boilerplate (lead dev, do this first)

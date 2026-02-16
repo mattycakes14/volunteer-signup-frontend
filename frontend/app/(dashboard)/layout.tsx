@@ -17,9 +17,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   //   }
   // }, []);
   return (
-    <div>
+    <div style={{ display: "flex", minHeight: "100vh" }}>
       <Sidebar />
-      <main>{children}</main>
+      <main style={{ flex: 1 }}>{children}</main>
     </div>
   );
 }

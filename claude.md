@@ -7,7 +7,7 @@ A separate web portal that does two things:
 
 **Context:** 6 outreach sites that occur weekly throughout the quarter.
 
-**Design Template:** Framer dashboard-style portfolio layout (see `frontend/public/framer_design.png`)
+**Design Template:** Google Stitch exports (see `frontend/designs/stitch/`) — each page has a `screen.png` screenshot and `code.html` with full Tailwind markup.
 
 ---
 
@@ -211,6 +211,100 @@ DELETE /users/{id}
 | preceptor        | 2   | reject 409 |
 | outreach_manager | 2   | reject 409 |
 | dental_student   | 2   | reject 409 |
+
+---
+
+---
+
+## Design System (from Stitch Exports)
+
+### Design References
+All UI designs live in `frontend/designs/stitch/`. Each subdirectory has:
+- `screen.png` — visual screenshot of the page
+- `code.html` — standalone HTML/Tailwind prototype (use for exact classes, markup structure, and styles)
+
+### Pages Designed
+| Directory | Page | Description |
+|---|---|---|
+| `login_page` | Login | Centered glass card, email/password form |
+| `signup_page` | Sign Up | Split layout (promo left, form right), role toggle (Undergrad/Grad) |
+| `volunteer_dashboard` | Volunteer Dashboard | Sidebar nav, stats cards, upcoming events list, promo banner |
+| `browse_events` | Browse Events | Card grid, capacity badges per role, status pills |
+| `event_details` | Event Details | Full event view, map, role selection with progress bars, sign up CTA |
+| `volunteer_history` | Volunteer History | Table of past events with role/hours/status, export button |
+| `admin_dashboard_overview` | Admin Overview | Stats, recent signups table, "Next Up" card, site approval widget |
+| `admin_manage_events` | Admin Events | Table with site/date/status/volunteers/region, pagination |
+| `admin_create_new_event` | Create Event | Form — site dropdown, date, capacity counters, description, notes |
+| `admin_event_metrics` | Event Metrics | Post-event report — members served, grads attended, auto-calc hours, notes |
+
+### Colors
+| Token | Value | Usage |
+|---|---|---|
+| `primary` / `uw-purple` | `#1c0582` | Buttons, active nav, accents, links |
+| `primary-hover` | `#2a0a9e` | Button hover states |
+| `deep-purple` | `#2d2a4a` | Heading text |
+| `soft-pink` | `#fcebef` | Background gradient start |
+| `soft-blue` | `#f5fbff` | Background gradient mid |
+| `background-light` | `#f8f8f5` | Page background fallback |
+
+### Background
+Radial gradient: `radial-gradient(circle at 0% 0%, #ffeef8 0%, #eef6ff 50%, #fdfce8 100%)`
+Additional floating blurred circles (`bg-purple-200`, `bg-blue-100`, `bg-pink-100`) with `mix-blend-multiply filter blur-3xl opacity-30` for ambient color.
+
+### Glassmorphism (core UI panels)
+```css
+background: rgba(255, 255, 255, 0.65);
+backdrop-filter: blur(16px);
+border: 1px solid rgba(255, 255, 255, 0.5);
+box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+```
+
+### Typography
+- **Body font:** Inter (`font-display`)
+- **Heading font:** League Spartan (`font-brand` / `font-heading`)
+- Weights used: 300, 400, 500, 600, 700
+
+### Border Radius
+- Default: `1rem`
+- Large: `2rem`
+- XL: `3rem`
+- Buttons/inputs: `rounded-full` (9999px)
+
+### Icons
+- Material Icons (`material-icons` class)
+- Material Symbols Outlined (variable weight/fill)
+
+### Button Style
+```
+rounded-full, font-bold, shadow-lg shadow-primary/30
+hover: -translate-y-0.5, bg-primary/90
+focus: ring-4 ring-primary/30
+```
+
+### Status Badges
+| Status | Style |
+|---|---|
+| Open | `bg-green-100 text-green-700` |
+| Confirmed | `bg-blue-100 text-blue-700` |
+| Pending | `bg-orange-100 text-orange-700` |
+| Filling Fast | `bg-accent-purple text-white` |
+| Urgent Need | `bg-accent-purple text-white` + corner gradient |
+| Waitlist | `bg-pink-100 text-pink-700` + dimmed opacity |
+| Full | `bg-pink-100 text-pink-700` or `bg-slate-200 text-slate-500` |
+| Past | dimmed row styling |
+
+### Sidebar Nav Pattern
+- Glass panel sidebar, ~w-72 on desktop, collapsible to icon-only ~w-20
+- Active item: `bg-primary text-white rounded-full shadow-lg`
+- Inactive: `text-gray-600 hover:bg-white/50 hover:text-primary rounded-full`
+- User avatar + name at bottom, sign out button below nav
+
+### Event Card Pattern (Browse Events)
+- Glass panel, `rounded-[2rem]`, hover lift (`hover:-translate-y-1 hover:shadow-xl`)
+- Date number in colored square top-left, status pill top-right
+- Site name, time, location below
+- Capacity section: role name + filled/total badge per role
+- Full-width Sign Up button at bottom
 
 ---
 

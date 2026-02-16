@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Manage Events - UW Volunteer Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1c0582", // Updated to dark purple requested by user
+              "primary-hover": "#2a0a9e", // Slightly lighter for hover
+              "secondary-accent": "#ddff00", // Keeping the old green as a secondary accent if needed, though mainly replacing usage
+              "background-light": "#f8f8f5",
+              "background-dark": "#20230f",
+              "uw-purple": "#32006e", 
+              "uw-purple-light": "#4b2e83", 
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "2xl": "4rem", "full": "9999px"},
+            backdropBlur: {
+              'xs': '2px',
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            min-height: 100vh;
+        }
+        .bg-soft-gradient {
+            background: radial-gradient(circle at 0% 0%, rgba(230, 230, 255, 0.6) 0%, rgba(255, 255, 255, 0) 50%),
+                        radial-gradient(circle at 100% 0%, rgba(240, 230, 255, 0.6) 0%, rgba(255, 255, 255, 0) 50%),
+                        radial-gradient(circle at 100% 100%, rgba(230, 240, 255, 0.4) 0%, rgba(255, 255, 255, 0) 50%),
+                        radial-gradient(circle at 0% 100%, rgba(240, 230, 255, 0.4) 0%, rgba(255, 255, 255, 0) 50%);
+            background-color: #f8f8f5;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        }
+        .glass-sidebar {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-right: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-soft-gradient font-display text-slate-800 antialiased overflow-hidden">
+<div class="flex h-screen w-full">
+<aside class="w-20 lg:w-72 glass-sidebar flex flex-col justify-between h-full z-20 transition-all duration-300">
+<div>
+<div class="h-24 flex items-center justify-center lg:justify-start lg:px-8 border-b border-white/40">
+<div class="h-10 w-10 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl shrink-0 shadow-lg shadow-primary/30">
+                    W
+                </div>
+<div class="hidden lg:block ml-4">
+<h1 class="font-bold text-primary leading-tight">UW Health</h1>
+<p class="text-xs text-slate-500 font-medium">Outreach Admin</p>
+</div>
+</div>
+<nav class="mt-8 px-4 space-y-2">
+<a class="flex items-center p-3 text-slate-500 hover:text-primary hover:bg-white/50 rounded-lg transition-colors group" href="#">
+<span class="material-icons-outlined group-hover:scale-110 transition-transform">dashboard</span>
+<span class="hidden lg:block ml-4 font-medium">Dashboard</span>
+</a>
+<a class="flex items-center p-3 text-white bg-primary shadow-md shadow-primary/20 rounded-lg transition-colors group border border-white/20" href="#">
+<span class="material-icons-outlined text-white">event_note</span>
+<span class="hidden lg:block ml-4 font-bold">Events</span>
+</a>
+<a class="flex items-center p-3 text-slate-500 hover:text-primary hover:bg-white/50 rounded-lg transition-colors group" href="#">
+<span class="material-icons-outlined group-hover:scale-110 transition-transform">people</span>
+<span class="hidden lg:block ml-4 font-medium">Volunteers</span>
+</a>
+<a class="flex items-center p-3 text-slate-500 hover:text-primary hover:bg-white/50 rounded-lg transition-colors group" href="#">
+<span class="material-icons-outlined group-hover:scale-110 transition-transform">analytics</span>
+<span class="hidden lg:block ml-4 font-medium">Reports</span>
+</a>
+<a class="flex items-center p-3 text-slate-500 hover:text-primary hover:bg-white/50 rounded-lg transition-colors group" href="#">
+<span class="material-icons-outlined group-hover:scale-110 transition-transform">settings</span>
+<span class="hidden lg:block ml-4 font-medium">Settings</span>
+</a>
+</nav>
+</div>
+<div class="p-4 border-t border-white/40">
+<div class="flex items-center p-3 rounded-xl bg-white/40 hover:bg-white/60 transition-colors cursor-pointer backdrop-blur-sm border border-white/40">
+<img alt="Profile picture of Sarah M." class="h-10 w-10 rounded-full object-cover border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRfJii4M1N8gTo5vRe-NXskKXuu52uCu51nivUCiDi1qQayh-7NvqiB0A4gHZC8V_5YMIVZ51lnUj6V-S5GkOgDMPc9pUFuoAXV3foX52N4vywlD6bJO9-pwcSMIYtJZUbi3_RGBCkxfkMZjJCi9o7v5k5yZLnYyh43kbD1JMCi6XxPHejJncsBEDV4Rp9semXxHSifzsUMeruMSYI21a2OaugRyy9Aa1YNEAVMhXpiQ1jARzgSHztiWU0PRb2VC8o2GKVQCOHkIc"/>
+<div class="hidden lg:block ml-3">
+<p class="text-sm font-semibold text-primary">Sarah M.</p>
+<p class="text-xs text-slate-500">Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full relative overflow-hidden">
+<header class="h-24 px-8 flex items-center justify-between z-10">
+<div>
+<h2 class="text-2xl font-bold text-primary">Events Management</h2>
+<p class="text-slate-500 text-sm mt-1">Manage schedules, sites, and volunteer allocation</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full text-slate-400 hover:bg-white/50 hover:text-primary transition-colors relative">
+<span class="material-icons-outlined">notifications</span>
+<span class="absolute top-2 right-2 h-2 w-2 bg-red-400 rounded-full border border-white"></span>
+</button>
+<button class="bg-primary hover:bg-primary-hover text-white font-semibold py-3 px-6 rounded-full shadow-lg shadow-primary/30 transition-all hover:shadow-primary/50 hover:-translate-y-0.5 flex items-center gap-2">
+<span class="material-icons-outlined text-lg">add</span>
+                    Create New Event
+                </button>
+</div>
+</header>
+<div class="flex-1 p-4 lg:p-8 pt-0 overflow-y-auto">
+<div class="glass-panel rounded-lg w-full h-full flex flex-col overflow-hidden relative">
+<div class="p-6 border-b border-slate-200/50 bg-white/30 backdrop-blur-md flex flex-col md:flex-row gap-4 justify-between items-center">
+<div class="relative w-full md:w-96 group">
+<span class="material-icons-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-white/60 border-none rounded-full py-3 pl-12 pr-4 text-slate-700 placeholder-slate-400 focus:ring-2 focus:ring-primary/30 shadow-sm transition-all hover:bg-white/80" placeholder="Search by site name..." type="text"/>
+</div>
+<div class="flex gap-3 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
+<div class="relative min-w-[140px]">
+<select class="w-full appearance-none bg-white/60 border-none rounded-full py-3 pl-4 pr-10 text-slate-700 font-medium focus:ring-2 focus:ring-primary/30 cursor-pointer hover:bg-white/80 transition-colors shadow-sm">
+<option>All Statuses</option>
+<option>Upcoming</option>
+<option>Past</option>
+<option>Cancelled</option>
+</select>
+<span class="material-icons-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none text-sm">expand_more</span>
+</div>
+<div class="relative min-w-[160px]">
+<select class="w-full appearance-none bg-white/60 border-none rounded-full py-3 pl-4 pr-10 text-slate-700 font-medium focus:ring-2 focus:ring-primary/30 cursor-pointer hover:bg-white/80 transition-colors shadow-sm">
+<option>All Regions</option>
+<option>North Seattle</option>
+<option>Downtown</option>
+<option>Eastside</option>
+</select>
+<span class="material-icons-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none text-sm">place</span>
+</div>
+<button class="p-3 bg-white/60 rounded-full text-slate-500 hover:text-primary hover:bg-white transition-colors shadow-sm border border-transparent hover:border-slate-100">
+<span class="material-icons-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-auto flex-1">
+<table class="w-full text-left border-collapse">
+<thead class="bg-white/40 sticky top-0 z-10 backdrop-blur-md">
+<tr>
+<th class="p-5 pl-8 text-xs font-bold text-primary uppercase tracking-wider">Site Name</th>
+<th class="p-5 text-xs font-bold text-primary uppercase tracking-wider">Date &amp; Time</th>
+<th class="p-5 text-xs font-bold text-primary uppercase tracking-wider">Status</th>
+<th class="p-5 text-xs font-bold text-primary uppercase tracking-wider">Volunteers</th>
+<th class="p-5 text-xs font-bold text-primary uppercase tracking-wider">Region</th>
+<th class="p-5 pr-8 text-xs font-bold text-primary uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200/40 text-sm">
+<tr class="group hover:bg-primary/5 transition-colors duration-200">
+<td class="p-5 pl-8">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600 shadow-sm">
+<span class="material-icons-outlined text-xl">medical_services</span>
+</div>
+<div>
+<p class="font-semibold text-slate-800">Seattle Community Center</p>
+<p class="text-xs text-slate-500">ID: #EVT-2023-089</p>
+</div>
+</div>
+</td>
+<td class="p-5">
+<p class="font-medium text-slate-700">Oct 24, 2023</p>
+<p class="text-xs text-slate-500">09:00 AM - 02:00 PM</p>
+</td>
+<td class="p-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-100/60 text-green-700 border border-green-200 backdrop-blur-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-2 animate-pulse"></span>
+                                    Upcoming
+                                </span>
+</td>
+<td class="p-5">
+<div class="flex items-center gap-2">
+<div class="w-24 h-2 bg-slate-200 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 60%"></div>
+</div>
+<span class="text-xs font-medium text-slate-600">12/20</span>
+</div>
+</td>
+<td class="p-5 text-slate-600">Downtown</td>
+<td class="p-5 pr-8 text-right">
+<div class="flex items-center justify-end gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-slate-500 hover:text-primary hover:bg-primary/10 rounded-full transition-colors" title="Edit">
+<span class="material-icons-outlined text-lg">edit</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-full transition-colors" title="Delete">
+<span class="material-icons-outlined text-lg">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-primary/5 transition-colors duration-200">
+<td class="p-5 pl-8">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-indigo-100 flex items-center justify-center text-indigo-600 shadow-sm">
+<span class="material-icons-outlined text-xl">local_hospital</span>
+</div>
+<div>
+<p class="font-semibold text-slate-800">UW Medical Plaza</p>
+<p class="text-xs text-slate-500">ID: #EVT-2023-092</p>
+</div>
+</div>
+</td>
+<td class="p-5">
+<p class="font-medium text-slate-700">Nov 02, 2023</p>
+<p class="text-xs text-slate-500">10:00 AM - 04:00 PM</p>
+</td>
+<td class="p-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-100/60 text-green-700 border border-green-200 backdrop-blur-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-2"></span>
+                                    Upcoming
+                                </span>
+</td>
+<td class="p-5">
+<div class="flex items-center gap-2">
+<div class="w-24 h-2 bg-slate-200 rounded-full overflow-hidden">
+<div class="h-full bg-orange-400" style="width: 33%"></div>
+</div>
+<span class="text-xs font-medium text-slate-600">5/15</span>
+</div>
+</td>
+<td class="p-5 text-slate-600">University District</td>
+<td class="p-5 pr-8 text-right">
+<div class="flex items-center justify-end gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-slate-500 hover:text-primary hover:bg-primary/10 rounded-full transition-colors" title="Edit">
+<span class="material-icons-outlined text-lg">edit</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-full transition-colors" title="Delete">
+<span class="material-icons-outlined text-lg">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-primary/5 transition-colors duration-200">
+<td class="p-5 pl-8">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-pink-100 flex items-center justify-center text-pink-600 shadow-sm">
+<span class="material-icons-outlined text-xl">airport_shuttle</span>
+</div>
+<div>
+<p class="font-semibold text-slate-800">Mobile Clinic A</p>
+<p class="text-xs text-slate-500">ID: #EVT-2023-045</p>
+</div>
+</div>
+</td>
+<td class="p-5">
+<p class="font-medium text-slate-700">Sept 15, 2023</p>
+<p class="text-xs text-slate-500">08:00 AM - 05:00 PM</p>
+</td>
+<td class="p-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-slate-100/60 text-slate-600 border border-slate-200 backdrop-blur-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400 mr-2"></span>
+                                    Past
+                                </span>
+</td>
+<td class="p-5">
+<div class="flex items-center gap-2">
+<div class="w-24 h-2 bg-slate-200 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 100%"></div>
+</div>
+<span class="text-xs font-medium text-slate-600">18/18</span>
+</div>
+</td>
+<td class="p-5 text-slate-600">South Seattle</td>
+<td class="p-5 pr-8 text-right">
+<div class="flex items-center justify-end gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-slate-500 hover:text-primary hover:bg-primary/10 rounded-full transition-colors" title="Edit">
+<span class="material-icons-outlined text-lg">edit</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-full transition-colors" title="Delete">
+<span class="material-icons-outlined text-lg">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-primary/5 transition-colors duration-200">
+<td class="p-5 pl-8">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-teal-100 flex items-center justify-center text-teal-600 shadow-sm">
+<span class="material-icons-outlined text-xl">school</span>
+</div>
+<div>
+<p class="font-semibold text-slate-800">Rainier Beach High</p>
+<p class="text-xs text-slate-500">ID: #EVT-2023-099</p>
+</div>
+</div>
+</td>
+<td class="p-5">
+<p class="font-medium text-slate-700">Nov 15, 2023</p>
+<p class="text-xs text-slate-500">11:00 AM - 03:00 PM</p>
+</td>
+<td class="p-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-amber-100/60 text-amber-700 border border-amber-200 backdrop-blur-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-2"></span>
+                                    Pending
+                                </span>
+</td>
+<td class="p-5">
+<div class="flex items-center gap-2">
+<div class="w-24 h-2 bg-slate-200 rounded-full overflow-hidden">
+<div class="h-full bg-slate-300" style="width: 0%"></div>
+</div>
+<span class="text-xs font-medium text-slate-600">0/10</span>
+</div>
+</td>
+<td class="p-5 text-slate-600">Rainier Beach</td>
+<td class="p-5 pr-8 text-right">
+<div class="flex items-center justify-end gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-slate-500 hover:text-primary hover:bg-primary/10 rounded-full transition-colors" title="Edit">
+<span class="material-icons-outlined text-lg">edit</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-full transition-colors" title="Delete">
+<span class="material-icons-outlined text-lg">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-slate-200/50 bg-white/30 backdrop-blur-md flex items-center justify-between">
+<div class="text-xs text-slate-500 font-medium pl-4">
+                        Showing <span class="text-slate-800">1-4</span> of <span class="text-slate-800">12</span> events
+                    </div>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 rounded-full border border-slate-200 bg-white/50 text-slate-500 text-xs font-medium hover:bg-white hover:text-primary disabled:opacity-50 transition-colors">Previous</button>
+<button class="px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20 transition-colors">1</button>
+<button class="px-3 py-1.5 rounded-full border border-transparent text-slate-500 text-xs font-medium hover:bg-white hover:text-primary transition-colors">2</button>
+<button class="px-3 py-1.5 rounded-full border border-transparent text-slate-500 text-xs font-medium hover:bg-white hover:text-primary transition-colors">3</button>
+<button class="px-3 py-1.5 rounded-full border border-slate-200 bg-white/50 text-slate-500 text-xs font-medium hover:bg-white hover:text-primary transition-colors">Next</button>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute top-20 right-20 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 pointer-events-none -z-10"></div>
+<div class="absolute bottom-20 left-20 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 pointer-events-none -z-10"></div>
+</main>
+</div>
+
+</body></html>
