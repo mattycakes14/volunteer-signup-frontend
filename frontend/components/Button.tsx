@@ -6,7 +6,13 @@ interface ButtonProps {
   className?: string;
 }
 
-export default function Button({ children, onClick, type, disabled, className }: ButtonProps) {
+export default function Button({
+  children,
+  onClick,
+  type,
+  disabled,
+  className,
+}: ButtonProps) {
   return (
     <button
       type={type}

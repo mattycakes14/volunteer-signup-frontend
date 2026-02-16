@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Volunteer History - UW Volunteer Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1c0582",
+                        "primary-foreground": "#ffffff",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#0f0f18",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>.custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }.glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .dark .glass-panel {
+            background: rgba(28, 5, 130, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-sidebar {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .dark .glass-sidebar {
+            background: rgba(15, 15, 24, 0.8);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 antialiased h-screen overflow-hidden flex">
+<div class="fixed inset-0 z-[-1] bg-gradient-to-br from-indigo-100 via-purple-100 to-blue-200 dark:from-background-dark dark:via-indigo-900/20 dark:to-background-dark opacity-80 pointer-events-none"></div>
+<aside class="glass-sidebar w-80 h-full flex flex-col justify-between py-10 px-6 shrink-0 z-20 transition-all duration-300">
+<div>
+<div class="flex items-center gap-3 mb-14 px-2">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-icons text-white">medical_services</span>
+</div>
+<div class="flex flex-col">
+<span class="font-bold text-lg tracking-tight text-slate-900 dark:text-white leading-none">UW Health</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wider uppercase">Outreach Portal</span>
+</div>
+</div>
+<nav class="space-y-2">
+<a class="flex items-center gap-4 px-6 py-4 rounded-full text-slate-600 dark:text-slate-300 hover:bg-white/40 dark:hover:bg-white/10 transition-all group" href="#">
+<span class="material-icons text-xl group-hover:text-primary transition-colors">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 rounded-full bg-primary text-white shadow-lg shadow-primary/30 transition-all" href="#">
+<span class="material-icons text-xl">history</span>
+<span class="font-bold">History</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 rounded-full text-slate-600 dark:text-slate-300 hover:bg-white/40 dark:hover:bg-white/10 transition-all group" href="#">
+<span class="material-icons text-xl group-hover:text-primary transition-colors">event</span>
+<span class="font-medium">Upcoming Events</span>
+</a>
+<a class="flex items-center gap-4 px-6 py-4 rounded-full text-slate-600 dark:text-slate-300 hover:bg-white/40 dark:hover:bg-white/10 transition-all group" href="#">
+<span class="material-icons text-xl group-hover:text-primary transition-colors">school</span>
+<span class="font-medium">Training</span>
+</a>
+</nav>
+</div>
+<div class="glass-panel p-4 rounded-lg flex items-center gap-3">
+<img alt="Portrait of a smiling young medical student" class="w-10 h-10 rounded-full object-cover border-2 border-primary" data-alt="Portrait of a smiling young medical student" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVMmTyfc8kfnrXUYQC20POtOrubAjOh7LXuDLUj84EmRKxZW0pxfzWJhjhr2hPneZZ5d9GXVcsQt2Cgzx1aQtMwB0MiGATzKI0vEcKTZr_7Lty25BxT0TvUl8z50LzTx8bQi71sr7dmDTv2NZOAXao5hWZha8GCup5_-459beEwnNse9PiFfIb160Us-eeTcxP6COc4RAPpWpGXXc_iUNABvD7_Sg-I_T9sOL4YQOES3TvlCpOUJhvv4cdza3-A-KW8eh4HU52RQQ"/>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-slate-900 dark:text-white truncate">Sarah Jenkins</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate">Nursing • Class of '25</p>
+</div>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-icons text-xl">logout</span>
+</button>
+</div>
+</aside>
+<main class="flex-1 h-full overflow-y-auto relative z-10 p-8 lg:p-12 xl:p-16">
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+<div>
+<h1 class="text-4xl font-bold text-slate-900 dark:text-white tracking-tight mb-2">Volunteer History</h1>
+<p class="text-slate-600 dark:text-slate-400">Track your contributions and verified hours.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-6 py-3 rounded-full bg-white/50 dark:bg-white/10 hover:bg-white/70 dark:hover:bg-white/20 text-slate-700 dark:text-white font-medium transition-all border border-white/40 dark:border-white/10 backdrop-blur-sm">
+<span class="material-icons text-sm">filter_list</span>
+<span>Filter</span>
+</button>
+<button class="flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-bold hover:brightness-110 shadow-lg shadow-primary/30 transition-all">
+<span class="material-icons text-sm">download</span>
+<span>Export Report</span>
+</button>
+</div>
+</header>
+<section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+<div class="glass-panel p-8 rounded-xl flex items-center justify-between group hover:border-primary/50 transition-colors duration-300">
+<div>
+<p class="text-slate-500 dark:text-slate-400 font-medium mb-1 uppercase tracking-wider text-sm">Events Attended</p>
+<h2 class="text-5xl font-bold text-primary dark:text-white">12</h2>
+</div>
+<div class="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 flex items-center justify-center">
+<span class="material-icons text-3xl">event_available</span>
+</div>
+</div>
+<div class="glass-panel p-8 rounded-xl flex items-center justify-between group hover:border-primary/50 transition-colors duration-300">
+<div>
+<p class="text-slate-500 dark:text-slate-400 font-medium mb-1 uppercase tracking-wider text-sm">Total Hours</p>
+<h2 class="text-5xl font-bold text-primary dark:text-white">48.5</h2>
+</div>
+<div class="w-16 h-16 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 flex items-center justify-center">
+<span class="material-icons text-3xl">schedule</span>
+</div>
+</div>
+</section>
+<section class="glass-panel rounded-xl overflow-hidden shadow-sm">
+<div class="p-8 border-b border-white/30 dark:border-white/5 flex items-center justify-between">
+<h3 class="text-xl font-bold text-slate-800 dark:text-white">Past Events</h3>
+<div class="flex gap-2">
+<span class="text-xs font-bold px-3 py-1 rounded-full bg-primary/10 text-primary dark:text-primary-foreground border border-primary/20">Fall Semester 2023</span>
+</div>
+</div>
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-white/40 dark:border-white/10 text-slate-500 dark:text-slate-400 text-sm uppercase tracking-wider">
+<th class="p-6 font-semibold">Site / Location</th>
+<th class="p-6 font-semibold">Date</th>
+<th class="p-6 font-semibold">Role</th>
+<th class="p-6 font-semibold">Hours</th>
+<th class="p-6 font-semibold text-right">Status</th>
+</tr>
+</thead>
+<tbody class="text-slate-700 dark:text-slate-300 text-sm font-medium">
+<tr class="group hover:bg-white/40 dark:hover:bg-white/5 transition-colors">
+<td class="p-6 flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg overflow-hidden shrink-0 shadow-sm">
+<img alt="Modern hospital building exterior" class="w-full h-full object-cover" data-alt="Modern hospital building exterior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkFsc357UdVSwRspv4smmVRx2tL6eYg6kr8LnKpVi_eCm1K5s-KvigSkuo3ri5-2Qm6UESAhOzMmtCbegQK7E5yHD-B3GjzqJe1Upa-z5UlYcCzKgfnyZ2pfXdxIK4xTuwbyenvJTRezCYYpr9sDrAXoKz86OTl95_hm7wYr8yL2IkNM5Peja7R9_-vVBrXyRxNIHd-xVKsDNHoXpzUU9XSKCgsTWPvHH4l7BIjB5RkkOGOyTJGXQyVnA5ZhDRBswVRGhpK0q9aPs"/>
+</div>
+<div>
+<div class="font-bold text-slate-900 dark:text-white">Seattle Children's Hospital</div>
+<div class="text-xs text-slate-500 font-normal">Pediatric Ward</div>
+</div>
+</td>
+<td class="p-6 whitespace-nowrap">Oct 12, 2023</td>
+<td class="p-6">
+<span class="bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-200 px-3 py-1 rounded-full text-xs font-bold border border-indigo-200 dark:border-indigo-800/50">
+                            Gen. Assistant
+                        </span>
+</td>
+<td class="p-6 font-bold text-lg text-slate-800 dark:text-white">4.0</td>
+<td class="p-6 text-right">
+<span class="material-icons text-emerald-600 dark:text-emerald-400 text-xl" title="Verified">check_circle</span>
+</td>
+</tr>
+<tr class="bg-white/20 dark:bg-white/5 group hover:bg-white/40 dark:hover:bg-white/10 transition-colors">
+<td class="p-6 flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg overflow-hidden shrink-0 shadow-sm">
+<img alt="Busy community health clinic entrance" class="w-full h-full object-cover" data-alt="Busy community health clinic entrance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCd51pKaPuEW8HcIF8WIYYNiMJAXJTj-y9YLnCPiJDtAptQLXo3IA2uVON8O3IFuFEbudrHThodYYs58uXjF_uRFUwuV36qdWsPqmf3-pBfoqsbO6rWUfEjQMVKDSNiYTrAxvLwDBREnB8OshuUE_iOFuQZi2_EUzM411A_YFiOePM_9VY1afz3Vw5U1AlWa2eAmqW4bzuGTWFZHpFwBCBzc0KDSwdF54C8YPZ0862HKhNDabZx5DNs2tGFmbBL45o0KDO02dLC6sA"/>
+</div>
+<div>
+<div class="font-bold text-slate-900 dark:text-white">UW Medical Center</div>
+<div class="text-xs text-slate-500 font-normal">Vaccine Drive</div>
+</div>
+</td>
+<td class="p-6 whitespace-nowrap">Sep 28, 2023</td>
+<td class="p-6">
+<span class="bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-200 px-3 py-1 rounded-full text-xs font-bold border border-purple-200 dark:border-purple-800/50">
+                            Vaccine Support
+                        </span>
+</td>
+<td class="p-6 font-bold text-lg text-slate-800 dark:text-white">6.5</td>
+<td class="p-6 text-right">
+<span class="material-icons text-emerald-600 dark:text-emerald-400 text-xl" title="Verified">check_circle</span>
+</td>
+</tr>
+<tr class="group hover:bg-white/40 dark:hover:bg-white/5 transition-colors">
+<td class="p-6 flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg overflow-hidden shrink-0 shadow-sm">
+<img alt="Community park during outreach event" class="w-full h-full object-cover" data-alt="Community park during outreach event" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4aamIC7j3ZgzmehszFkGT32truAbc89haDDeYGIMY6DIuaiuk63DP9Q9mRvKSYaaFS5vHhl6RwPsuZdLffTtogvdylaZOusABPX4jO55Y1OBcgAcarYn4-M-LqJ3IhipHBRYAgWC2fqmPJAlVX99aFUZcvL95cwcGNXtKYKzJ6pJ616G7uoGRWtL6th5Q-oqJtTDF-sKSuCd8G9ERvPKFm0D9xz5pBj6FgdghN2Q3pINqsg7kccKhdE9JMNiYVlqtrP9SzO9Jd8Y"/>
+</div>
+<div>
+<div class="font-bold text-slate-900 dark:text-white">Downtown Outreach</div>
+<div class="text-xs text-slate-500 font-normal">Mobile Clinic</div>
+</div>
+</td>
+<td class="p-6 whitespace-nowrap">Sep 15, 2023</td>
+<td class="p-6">
+<span class="bg-fuchsia-50 dark:bg-fuchsia-900/30 text-fuchsia-700 dark:text-fuchsia-200 px-3 py-1 rounded-full text-xs font-bold border border-fuchsia-200 dark:border-fuchsia-800/50">
+                            Intake Specialist
+                        </span>
+</td>
+<td class="p-6 font-bold text-lg text-slate-800 dark:text-white">5.0</td>
+<td class="p-6 text-right">
+<span class="material-icons text-emerald-600 dark:text-emerald-400 text-xl" title="Verified">check_circle</span>
+</td>
+</tr>
+<tr class="bg-white/20 dark:bg-white/5 group hover:bg-white/40 dark:hover:bg-white/10 transition-colors">
+<td class="p-6 flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg overflow-hidden shrink-0 shadow-sm">
+<img alt="Red Cross training center room" class="w-full h-full object-cover" data-alt="Red Cross training center room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxQ4oPyEgRQ_ObjaCKtDDCXIMLYHVEUdSEsx8ZG4mh82ZfwTcnkLsRnarMsDDb3ObtfmVxiBXSo4Jk9EFQQEr0cM7XAgFNfBi2ecj8KwKS0HDr8jYg-W3uHbWQzvCUpp4W1xVKSHnOPA5aupRgOFxT30ODYNFeeAtacGtzvuh-jCRyk_grJg3BddawOhh4wcnJnNYbFTCRPpsSiO15tROCMXtVMHahP_sTPeN0p1755SE2rFdFwuo_RJgDbk8z5BTTmqTNJfkQ-CY"/>
+</div>
+<div>
+<div class="font-bold text-slate-900 dark:text-white">Red Cross Chapter</div>
+<div class="text-xs text-slate-500 font-normal">Blood Drive</div>
+</div>
+</td>
+<td class="p-6 whitespace-nowrap">Aug 30, 2023</td>
+<td class="p-6">
+<span class="bg-orange-50 dark:bg-orange-900/30 text-orange-700 dark:text-orange-200 px-3 py-1 rounded-full text-xs font-bold border border-orange-200 dark:border-orange-800/50">
+                            Donor Greeter
+                        </span>
+</td>
+<td class="p-6 font-bold text-lg text-slate-800 dark:text-white">3.0</td>
+<td class="p-6 text-right">
+<span class="material-icons text-slate-400 text-xl" title="Pending">hourglass_empty</span>
+</td>
+</tr>
+<tr class="group hover:bg-white/40 dark:hover:bg-white/5 transition-colors">
+<td class="p-6 flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg overflow-hidden shrink-0 shadow-sm">
+<img alt="Modern hospital building exterior" class="w-full h-full object-cover" data-alt="Modern hospital building exterior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArBNQh8xailasPhGegUez6bKAjZlfAE8psM8YBqpJm5kpboaC3oXZtZAa2tzY2YPy3ar3Zht0FwmU6tAqI-Uv0OtKpVqpPkj-_5qe_9yT9MT70ODXlaQPYZz5XGVSBj8Q0LFk8nLtWwccBOmDRoHlE50Bpx-UR3tSycztYkMuFV7BmgIxboBpnlrKGdQpXr6qVsmGBEI6vj-Wbilr8ggpJ9EgD3RxiKSA8jIZBGfe3Ur8_u3vSwMrH7r0A5jAMFMhKQRS20j8i9Ok"/>
+</div>
+<div>
+<div class="font-bold text-slate-900 dark:text-white">Seattle Children's Hospital</div>
+<div class="text-xs text-slate-500 font-normal">Pediatric Ward</div>
+</div>
+</td>
+<td class="p-6 whitespace-nowrap">Aug 12, 2023</td>
+<td class="p-6">
+<span class="bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-200 px-3 py-1 rounded-full text-xs font-bold border border-indigo-200 dark:border-indigo-800/50">
+                            Gen. Assistant
+                        </span>
+</td>
+<td class="p-6 font-bold text-lg text-slate-800 dark:text-white">4.0</td>
+<td class="p-6 text-right">
+<span class="material-icons text-emerald-600 dark:text-emerald-400 text-xl" title="Verified">check_circle</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 border-t border-white/30 dark:border-white/5 flex items-center justify-between text-sm text-slate-600 dark:text-slate-400">
+<span>Showing 5 of 12 events</span>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-white/50 dark:hover:bg-white/10 disabled:opacity-50 transition-colors" disabled="">
+<span class="material-icons text-base">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-primary text-white font-bold flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded-full hover:bg-white/50 dark:hover:bg-white/10 flex items-center justify-center transition-colors">2</button>
+<button class="w-8 h-8 rounded-full hover:bg-white/50 dark:hover:bg-white/10 flex items-center justify-center transition-colors">3</button>
+<button class="p-2 rounded-full hover:bg-white/50 dark:hover:bg-white/10 transition-colors">
+<span class="material-icons text-base">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<footer class="mt-12 text-center text-slate-500 dark:text-slate-400 text-sm">
+<p>Need to log missing hours? <a class="text-primary font-bold hover:underline" href="#">Submit a manual entry form</a>.</p>
+</footer>
+</main>
+
+</body></html>

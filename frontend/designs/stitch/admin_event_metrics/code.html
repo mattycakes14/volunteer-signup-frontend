@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Event Metrics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1c0582", // Dark purple as requested
+                        "primary-dark": "#12035a", // Darker shade for hover states
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#20230f",
+                        "soft-pink": "#fce7f3",
+                        "soft-blue": "#e0f2fe",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem", 
+                        "lg": "2rem", 
+                        "xl": "3rem", 
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>.glass-panel {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        .dark .glass-panel {
+            background: rgba(32, 35, 15, 0.6);
+            border: 1px solid rgba(28, 5, 130, 0.1);
+        }@keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animated-gradient-bg {
+            background: linear-gradient(-45deg, #fce7f3, #e0f2fe, #f0fdf4, #f8f8f5);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+        .dark .animated-gradient-bg {
+            background: linear-gradient(-45deg, #2a2d15, #1e293b, #20230f);
+            background-size: 400% 400%;
+        }
+    </style>
+</head>
+<body class="font-display text-gray-800 bg-background-light dark:bg-background-dark dark:text-white min-h-screen flex flex-col transition-colors duration-300">
+<header class="w-full px-6 py-4 flex items-center justify-between z-10">
+<div class="flex items-center space-x-3">
+<div class="bg-white/80 dark:bg-black/20 p-2 rounded-full backdrop-blur-sm">
+<span class="material-icons text-gray-500 dark:text-gray-300">medication</span>
+</div>
+<nav class="text-sm font-medium text-gray-500 dark:text-gray-400">
+<a class="hover:text-gray-900 dark:hover:text-white transition-colors" href="#">Admin Portal</a>
+<span class="mx-2">/</span>
+<span class="text-gray-900 dark:text-white">Event Metrics</span>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+<button class="flex items-center space-x-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
+<span class="material-icons text-[20px]">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-gray-700 dark:text-white overflow-hidden border border-white/50 dark:border-white/10">
+<img alt="User avatar" class="h-full w-full object-cover" data-alt="Portrait of a smiling woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdTXyfzvAe0dKHmvD5BFcOSaB6WEoJGRpUOoy5ByOSJNO3vqiAD_LFJdBZjB-saNMwAbSwzpm3ot80mZ9ZtIoWg6kqBYKdWynnw83hYo6d8TVAXQetBjQ6WbAsXzVKjCGNZ4HnC2792VonXpOl2GUZXg2maG86o6pF5PDX6MOwPHIh-A4I6QFmlI-LWe2lWmxzDmFU0BkyLzgCe90dHLw4LtoSQy0J6RshwDITzO9pw2r9x3N3Yw8UdqeOVsS7rnBAYs1eBb5ZRDg"/>
+</div>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center p-4 relative overflow-hidden animated-gradient-bg">
+<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-200/40 dark:bg-purple-900/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+<div class="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-200/40 dark:bg-blue-900/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+<div class="absolute bottom-1/4 left-1/2 w-96 h-96 bg-purple-300/30 dark:bg-purple-800/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+<div class="relative w-full max-w-lg z-10">
+<div class="glass-panel rounded-lg p-8 md:p-10 shadow-xl border-t border-white/80 dark:border-white/10">
+<div class="mb-8 text-center">
+<div class="inline-flex items-center justify-center px-3 py-1 mb-4 rounded-full bg-primary text-xs font-bold uppercase tracking-wider text-white">
+                    Post-Event Report
+                </div>
+<h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2 tracking-tight">St. Vincent - Week 3</h1>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium">October 24, 2023 • Mobile Clinic Unit 2</p>
+</div>
+<form class="space-y-6">
+<div class="group">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 pl-1" for="people-served">
+                        Community Members Served
+                    </label>
+<div class="relative rounded-full shadow-sm">
+<div class="pointer-events-none absolute inset-y-0 left-0 pl-4 flex items-center">
+<span class="material-icons text-gray-400 text-[20px]">groups</span>
+</div>
+<input class="block w-full rounded-full border-0 py-3.5 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary bg-white/70 dark:bg-black/30 dark:text-white dark:ring-gray-600 dark:placeholder:text-gray-500 shadow-sm transition-all" id="people-served" name="people-served" placeholder="0" type="number" value="42"/>
+</div>
+</div>
+<div class="group">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 pl-1" for="students-attended">
+                        Graduate Students Attended
+                    </label>
+<div class="relative rounded-full shadow-sm">
+<div class="pointer-events-none absolute inset-y-0 left-0 pl-4 flex items-center">
+<span class="material-icons text-gray-400 text-[20px]">school</span>
+</div>
+<input class="block w-full rounded-full border-0 py-3.5 pl-11 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary bg-white/70 dark:bg-black/30 dark:text-white dark:ring-gray-600 dark:placeholder:text-gray-500 shadow-sm transition-all" id="students-attended" name="students-attended" placeholder="0" type="number" value="8"/>
+</div>
+</div>
+<div class="group relative">
+<div class="flex justify-between items-center mb-2 pl-1">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="service-hours">
+                            Total Service Hours
+                        </label>
+<span class="text-xs text-primary bg-primary/10 px-2 py-0.5 rounded-full font-bold dark:bg-primary/20 dark:text-primary-light">Auto-Calculated</span>
+</div>
+<div class="relative rounded-full shadow-sm">
+<div class="pointer-events-none absolute inset-y-0 left-0 pl-4 flex items-center">
+<span class="material-icons text-gray-400 text-[20px]">schedule</span>
+</div>
+<input class="block w-full rounded-full border-0 py-3.5 pl-11 pr-4 text-gray-900 font-semibold ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary bg-gray-50/80 dark:bg-white/5 dark:text-white dark:ring-gray-600 dark:placeholder:text-gray-500 shadow-inner transition-all" id="service-hours" name="service-hours" step="0.5" type="number" value="32.0"/>
+<div class="pointer-events-none absolute inset-y-0 right-0 pr-4 flex items-center">
+<span class="text-gray-400 text-sm font-medium">hrs</span>
+</div>
+</div>
+<p class="mt-2 text-xs text-gray-500 dark:text-gray-400 pl-4 flex items-center">
+<span class="material-icons text-[14px] mr-1">info</span> Based on 4hr shift duration per student.
+                    </p>
+</div>
+<div class="group">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 pl-1" for="notes">
+                        Shift Notes <span class="text-gray-400 font-normal">(Optional)</span>
+</label>
+<textarea class="block w-full rounded-[1.5rem] border-0 py-3 px-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary bg-white/70 dark:bg-black/30 dark:text-white dark:ring-gray-600 resize-none shadow-sm transition-all" id="notes" placeholder="Any incidents or special mentions?" rows="2"></textarea>
+</div>
+<div class="pt-4 flex items-center justify-between space-x-4">
+<button class="flex-1 py-3.5 px-4 rounded-full text-sm font-medium text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-white/10 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400" type="button">
+                        Cancel
+                    </button>
+<button class="flex-[2] py-3.5 px-6 rounded-full bg-primary hover:bg-primary-dark text-white text-sm font-bold shadow-lg shadow-primary/30 transform transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:ring-offset-gray-900 flex items-center justify-center space-x-2" type="submit">
+<span>Save Metrics</span>
+<span class="material-icons text-[18px]">check_circle</span>
+</button>
+</div>
+</form>
+</div>
+<div class="mt-6 text-center">
+<p class="text-xs text-gray-500 dark:text-gray-400">
+                Last synced: Just now • <a class="underline hover:text-gray-800 dark:hover:text-white" href="#">View History</a>
+</p>
+</div>
+</div>
+</main>
+
+</body></html>
