@@ -16,6 +16,7 @@ A separate web portal that does two things:
 - **Backend:** FastAPI
 - **Database:** PostgreSQL
 - **Auth:** Supabase (abstracts hashing, enforces strict security)
+- **Styling:** Standard CSS (`.css` files with class selectors) — NOT Tailwind utility classes. The Stitch exports use Tailwind for reference, but translate those into plain CSS classes when building components. This is a learning project.
 
 ---
 

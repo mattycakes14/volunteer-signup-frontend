@@ -14,36 +14,12 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="auth-page">
-      <div className="auth-wrapper">
-        {/* Left panel — form */}
-        <div className="auth-form-panel">
-          <header className="auth-header">
-            <h1>{isSignUp ? "Create Account" : "Login"}</h1>
-            <p>
-              {isSignUp
-                ? "Sign up with your UW email to get started"
-                : "Welcome back! Sign in to your account"}
-            </p>
-          </header>
-
-          {isSignUp ? (
-            <SignupForm onToggle={toggle} />
-          ) : (
-            <LoginForm onToggle={toggle} />
-          )}
-        </div>
-
-        {/* Right panel — decorative */}
-        <div className="auth-image-panel">
-          <div className="panel-wave panel-wave--1" />
-          <div className="panel-wave panel-wave--2" />
-          <div className="panel-wave panel-wave--3" />
-          <div className="glass-card">
-            <span className="glass-card-text">UDSM Volunteer Portal</span>
-          </div>
-        </div>
-      </div>
+    <main>
+      {isSignUp ? (
+        <LoginForm onToggle={toggle} />
+      ) : (
+        <SignupForm onToggle={toggle} />
+      )}{" "}
     </main>
   );
 }
