@@ -52,6 +52,9 @@ main {
   margin-bottom: 2.5rem;
 }
 
+.iconLogo {
+  margin-bottom: 1rem;
+}
 .smallIcon {
   width: 45px;
   height: 45px;
@@ -145,6 +148,6 @@ main {
   background: none;
   border: none;
   cursor: pointer;
+  font-family: "Inter";
+  font-weight: 600;
 }
-
-/* Sign Up Form Component Styles*/

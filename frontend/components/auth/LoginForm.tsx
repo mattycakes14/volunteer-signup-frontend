@@ -12,7 +12,7 @@ import { ROUTES } from "@/lib/routes";
 import Image from "next/image";
 import passwordIcon from "@/public/passwordIcon.png";
 import emailIcon from "@/public/emailIcon.png";
-import smallIcon from "@/public/smallIcon.png";
+import smallIcon2 from "@/public/smallIconWithOutStyles.png";
 
 interface LoginFormProps {
   onToggle: () => void;
@@ -42,66 +42,62 @@ export default function LoginForm({ onToggle }: LoginFormProps) {
 
   return (
     <div className="loginContainer">
-      <Image
-        className="iconLogo"
-        src={smallIcon}
-        alt="small icon logo here"
-      />
+      <Image className="iconLogo" src={smallIcon2} alt="small icon logo here" />
       <div className="headerText">UDSM Outreach Portal</div>
       <div className="headerDescription">
         Welcome back, please login to your account.
       </div>
       <form onSubmit={handleSubmit}>
         <div className="inputContainer">
-        <label className="inputLabels" htmlFor="email">
-          Email address
-        </label>
-        <div className="inputWrapper">
-          <Image className="inputIcons" src={emailIcon} alt="email icon" />
-          <input
-            className="inputBox"
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="Enter your email"
-          />
-        </div>
-        <label className="inputLabels" htmlFor="password">
-          Password
-        </label>
+          <label className="inputLabels" htmlFor="email">
+            Email address
+          </label>
+          <div className="inputWrapper">
+            <Image className="inputIcons" src={emailIcon} alt="email icon" />
+            <input
+              className="inputBox"
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder="Enter your email"
+            />
+          </div>
+          <label className="inputLabels" htmlFor="password">
+            Password
+          </label>
 
-        <div className="inputWrapper">
-          <Image
-            className="inputIcons"
-            src={passwordIcon}
-            alt="password icon"
-          />
-          <Button
-            className="visibility"
-            type="button"
-            onClick={() => setIsPasswordVisible(!isPasswordVisible)}
-          >
-            {isPasswordVisible ? <EyeOff /> : <Eye />}
+          <div className="inputWrapper">
+            <Image
+              className="inputIcons"
+              src={passwordIcon}
+              alt="password icon"
+            />
+            <Button
+              className="visibility"
+              type="button"
+              onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+            >
+              {isPasswordVisible ? <EyeOff /> : <Eye />}
+            </Button>
+            <input
+              className="inputBox"
+              id="password"
+              type={isPasswordVisible ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="Enter your password"
+            />
+          </div>
+
+          {error && <p>{error.message}</p>}
+
+          <Button className="signInBox" type="submit" disabled={isLoading}>
+            {isLoading ? "Signing in..." : "Sign In"}
           </Button>
-          <input
-            className="inputBox"
-            id="password"
-            type={isPasswordVisible ? "text" : "password"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder="Enter your password"
-          />
         </div>
-
-        {error && <p>{error.message}</p>}
-
-        <Button className="signInBox" type="submit" disabled={isLoading}>
-          {isLoading ? "Signing in..." : "Sign In"}
-        </Button>
-      </div>
 
         <p className="bottomContent">
           {"Don't have an account? "}
