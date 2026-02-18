@@ -1,6 +1,17 @@
 /* Sign Up Form Component Styles */
 
-main {
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.signupPage {
   min-height: 100vh;
   display: flex;
   justify-content: center;

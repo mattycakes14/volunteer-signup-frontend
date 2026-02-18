@@ -12,7 +12,7 @@
   }
 }
 
-main {
+.loginPage {
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -55,6 +55,7 @@ main {
 .iconLogo {
   margin-bottom: 1rem;
 }
+
 .smallIcon {
   width: 45px;
   height: 45px;
@@ -95,11 +96,13 @@ main {
   position: relative;
   width: 100%;
 }
+
 .inputIcons {
   position: absolute;
   left: 0.75rem;
   top: 20%;
 }
+
 .inputWrapper input {
   padding-left: 2.5rem;
 }

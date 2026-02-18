@@ -1,0 +1,30 @@
+.dashboardContainer {
+  max-width: 275px;
+  max-height: 1000px;
+  background-color: #ffffff;
+  margin: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 2rem;
+}
+
+.title {
+  color: #111827;
+  font-family: "Inter";
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.titleContainer {
+  display: flex;
+}
+
+.smallIcon {
+  margin-right: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.subtitle {
+  font-family: "Inter";
+  font-size: 0.75rem;
+  color: #6b7280;
+}
