@@ -2,7 +2,7 @@
 // Route group (dashboard) does not appear in the URL
 "use client";
 import type { ReactNode } from "react";
-import { getSession, getAccessToken, getUserId } from "@/lib/auth";
+import { getSession, getAccessToken, getUserId, signOut } from "@/lib/auth";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/lib/routes";
 import { useEffect, useState } from "react";
@@ -39,7 +39,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
-      <Sidebar user={user} />
+      <Sidebar user={user} onSignOut={signOut} />
       <main style={{ flex: 1 }}>{children}</main>
     </div>
   );
