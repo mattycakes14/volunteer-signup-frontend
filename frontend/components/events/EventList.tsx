@@ -30,9 +30,9 @@ export default function EventList({ events, sites }: EventListProps) {
               <p className="site-description">{site.description}</p>
               <p className="site-contacts">{site.contacts}</p>
             </div>
-            <div className="site-events">
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 360px)", gap: "1.5rem"}}>
               {siteEvents.map((event) => (
-                <EventCard key={event.id} event={event} />
+                <EventCard key={event.id} event={{ ...event, site }}/>
               ))}
             </div>
           </div>

@@ -18,7 +18,7 @@ import type { User } from "@/types";
 
 const defaultNavBarItems = [
   { label: "Dashboard", icon: dashboard, alt: "Home", route: ROUTES.DASHBOARD },
-  { label: "Events", icon: events, alt: "Events", route: ROUTES.EVENTS },
+  { label: "Browse Events", icon: events, alt: "Events", route: ROUTES.EVENTS },
   { label: "History", icon: history, alt: "History", route: ROUTES.HISTORY },
 ];
 

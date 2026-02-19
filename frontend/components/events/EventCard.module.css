@@ -1,0 +1,101 @@
+.event-card {
+  background: #ffffff;
+  border-radius: 1.75rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 16px rgba(31, 38, 135, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 32px rgba(31, 38, 135, 0.13);
+}
+
+.event-card-status {
+  align-self: flex-end;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  background: #dcfce7;
+  color: #16a34a;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.event-card-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #4B2E83;
+  margin-bottom: 0.4rem;
+}
+
+.event-card-date {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.event-card-notes {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.card-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.signup-btn {
+  width: 100%;
+  background: #1c0582;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.85rem 1.5rem;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
+.signup-btn:hover {
+  background: #2a0a9e;
+}
+
+.capacity-section {
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.capacity-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #4B5563;
+}
+
+.capacity-badge {
+  background: #dcfce7;
+  color: #16a34a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+}
+
+.event-card-location {                                                          
+  font-size: 0.875rem;
+  color: #6B7280;
+  margin-bottom: 0.75rem;
+  padding-top: 3px;
+}
