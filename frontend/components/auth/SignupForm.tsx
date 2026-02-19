@@ -17,7 +17,7 @@ import { signUp } from "@/lib/auth";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/lib/routes";
 import { UserRole } from "@/types";
-import "@/components/auth/signup.css";
+import styles from "./Signup.module.css";
 
 import Image from "next/image";
 import smallIcon2 from "@/public/smallIconWithOutStyles.png";
@@ -71,55 +71,55 @@ export default function SignupForm({ onToggle }: SignupFormProps) {
   }
 
   return (
-    <div className="signUpContainer">
-      <div className="leftPanel">
-        <div className="titleHeader">
+    <div className={styles.signUpContainer}>
+      <div className={styles.leftPanel}>
+        <div className={styles.titleHeader}>
           <Image
-            className="signupSmallIcon"
+            className={styles.signupSmallIcon}
             src={smallIcon2}
             alt="small icon logo"
           />
           <div>UDSM Outreach</div>
         </div>
-        <div className="mainHeader">
+        <div className={styles.mainHeader}>
           Join the <span>Volunteers.</span>
         </div>
-        <div className="signupHeaderDesc">
+        <div className={styles.signupHeaderDesc}>
           Create your account to access the volunteer portal, manage shifts, and
           track your impact in the community.
         </div>
-        <Image className="stockImage" src={stockImage} alt="stock image" />
+        <Image className={styles.stockImage} src={stockImage} alt="stock image" />
       </div>
-      <div className="rightPanel">
-        <div className="createAccount">Create your account</div>
-        <div className="createAccountDesc">
+      <div className={styles.rightPanel}>
+        <div className={styles.createAccount}>Create your account</div>
+        <div className={styles.createAccountDesc}>
           Please fill in your details to get started.
         </div>
-        <div className="rolePills">
+        <div className={styles.rolePills}>
           <button
             type="button"
-            className={`rolePill ${role === UserRole.UNDERGRAD ? "rolePillActive" : ""}`}
+            className={`${styles.rolePill} ${role === UserRole.UNDERGRAD ? styles.rolePillActive : ""}`}
             onClick={() => setRole(UserRole.UNDERGRAD)}
           >
             Undergraduate (Scribe)
           </button>
           <button
             type="button"
-            className={`rolePill ${role === UserRole.GRAD ? "rolePillActive" : ""}`}
+            className={`${styles.rolePill} ${role === UserRole.GRAD ? styles.rolePillActive : ""}`}
             onClick={() => setRole(UserRole.GRAD)}
           >
             Graduate Student
           </button>
         </div>
         <form onSubmit={handleSubmit}>
-          <div className="firstContainer">
+          <div className={styles.firstContainer}>
             <div>
-              <label className="signUpInputLabels" htmlFor="signup-name">
+              <label className={styles.signUpInputLabels} htmlFor="signup-name">
                 FULL NAME
               </label>
               <div>
                 <input
-                  className="signUpInputBoxes"
+                  className={styles.signUpInputBoxes}
                   id="signup-name"
                   type="text"
                   value={name}
@@ -130,12 +130,12 @@ export default function SignupForm({ onToggle }: SignupFormProps) {
               </div>
             </div>
             <div>
-              <label className="signUpInputLabels" htmlFor="signup-phone">
+              <label className={styles.signUpInputLabels} htmlFor="signup-phone">
                 PHONE NUMBER
               </label>
               <div>
                 <input
-                  className="signUpInputBoxes"
+                  className={styles.signUpInputBoxes}
                   id="signup-phone"
                   type="tel"
                   value={phone}
@@ -146,14 +146,14 @@ export default function SignupForm({ onToggle }: SignupFormProps) {
               </div>
             </div>
           </div>
-          <div className="emailInputBox">
-            <label className="signUpInputLabels" htmlFor="signup-email">
+          <div className={styles.emailInputBox}>
+            <label className={styles.signUpInputLabels} htmlFor="signup-email">
               UNIVERSITY EMAIL
             </label>
-            <div className="signUpInputWrapper">
+            <div className={styles.signUpInputWrapper}>
               <Image src={grad} alt="Grad Icon" />
               <input
-                className="signUpInputBoxes"
+                className={styles.signUpInputBoxes}
                 id="signup-email"
                 type="text"
                 value={email}
@@ -162,19 +162,19 @@ export default function SignupForm({ onToggle }: SignupFormProps) {
                 required
               />
             </div>
-            <div className="emailFinePrint">
+            <div className={styles.emailFinePrint}>
               Must be a valid @uw.edu address
             </div>
           </div>
 
-          <div className="secondContainer">
+          <div className={styles.secondContainer}>
             <div>
-              <label className="signUpInputLabels" htmlFor="signup-major">
+              <label className={styles.signUpInputLabels} htmlFor="signup-major">
                 MAJOR
               </label>
               <div>
                 <input
-                  className="signUpInputBoxes"
+                  className={styles.signUpInputBoxes}
                   id="signup-major"
                   type="text"
                   value={major}
@@ -185,12 +185,12 @@ export default function SignupForm({ onToggle }: SignupFormProps) {
               </div>
             </div>
             <div>
-              <label className="signUpInputLabels" htmlFor="signup-year">
+              <label className={styles.signUpInputLabels} htmlFor="signup-year">
                 ACADEMIC YEAR
               </label>
               <div>
                 <select
-                  className="signUpSelectBox"
+                  className={styles.signUpSelectBox}
                   id="signup-year"
                   value={year}
                   onChange={(e) => setYear(e.target.value)}
@@ -205,13 +205,13 @@ export default function SignupForm({ onToggle }: SignupFormProps) {
               </div>
             </div>
           </div>
-          <div className="passwordInputBox">
-            <label className="signUpInputLabels" htmlFor="signup-password">
+          <div className={styles.passwordInputBox}>
+            <label className={styles.signUpInputLabels} htmlFor="signup-password">
               PASSWORD
             </label>
-            <div className="signUpInputWrapper">
+            <div className={styles.signUpInputWrapper}>
               <input
-                className="signUpInputBoxes"
+                className={styles.signUpInputBoxes}
                 id="signup-password"
                 type={isPasswordVisible ? "text" : "password"}
                 value={password}
@@ -225,17 +225,17 @@ export default function SignupForm({ onToggle }: SignupFormProps) {
           {error && <p>{error}</p>}
 
           <Button
-            className="createAccountBtn"
+            className={styles.createAccountBtn}
             type="submit"
             disabled={isLoading}
           >
             {isLoading ? "Signing up..." : "Create Account"}
           </Button>
 
-          <p className="alreadyHaveAnAccount">
+          <p className={styles.alreadyHaveAnAccount}>
             {"Already have an account? "}
             <Button
-              className="alreadyHaveAccountSignIn"
+              className={styles.alreadyHaveAccountSignIn}
               type="button"
               onClick={onToggle}
             >

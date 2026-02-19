@@ -1,0 +1,139 @@
+/** CSS Animations **/
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboardContainer {
+  max-width: 275px;
+  min-height: calc(100vh - 3rem);
+  background-color: #ffffff;
+  margin: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: slideDown 0.4s ease;
+}
+
+.title {
+  color: #111827;
+  font-family: "Inter";
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.titleContainer {
+  display: flex;
+}
+
+.smallIcon {
+  margin-right: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.subtitle {
+  font-family: "Inter";
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.signOutWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-top: auto;
+}
+
+.signOutIcon {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+}
+
+.signOut {
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(28, 5, 130, 0.1);
+  position: relative;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  border: 0.25rem solid #ffffff;
+  box-shadow: 0 4px 12px rgba(28, 5, 130, 0.15);
+  margin-top: 3rem;
+}
+
+.icon {
+  font-family: "Inter";
+  font-weight: 800;
+  font-size: 2rem;
+  color: #1c0582;
+  z-index: 1;
+}
+
+.userName {
+  margin-top: 0.5rem;
+  margin-bottom: 2.5rem;
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #111827;
+}
+
+.navLabelContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 9999px;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navLabelContainer:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.navLabelContainerActive {
+  background-color: #1c0582;
+  box-shadow: 0 10px 15px -3px rgba(28, 5, 130, 0.3);
+}
+
+.navLabelContainerActive:hover {
+  background-color: #1c0582;
+}
+
+.navIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.navLabel {
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.navLabelContainerActive .navLabel {
+  color: #ffffff;
+  font-weight: 600;
+}

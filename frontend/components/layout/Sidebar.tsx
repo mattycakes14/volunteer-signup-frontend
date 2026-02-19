@@ -2,54 +2,78 @@
 // Sidebar — navigation links, active state highlight, role-aware nav
 // Volunteer nav: Dashboard, Events, History
 // Admin nav: above + Admin section (Events, Sites, Archive)
-import "./sidebar.css";
+import styles from "./Sidebar.module.css";
 import Image from "next/image";
-import home from "@/public/home.png";
-import event from "@/public/event.png";
-import archive from "@/public/inbox.png";
+import smallIcon from "@/public/smallIconWithOutStyles.png";
+import dashboard from "@/public/dashboard.png";
+import events from "@/public/events.png";
+import history from "@/public/history.png";
+import settings from "@/public/settings.png";
+import signoutIcon from "@/public/signout.png";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/lib/routes";
+import type { User } from "@/types";
 
 const defaultNavBarItems = [
-  { label: "Dashboard", icon: home, alt: "Home", route: ROUTES.DASHBOARD },
-  { label: "Events", icon: event, alt: "Events", route: ROUTES.EVENTS },
-  { label: "Archived", icon: archive, alt: "Archived", route: ROUTES.HISTORY },
+  { label: "Dashboard", icon: dashboard, alt: "Home", route: ROUTES.DASHBOARD },
+  { label: "Events", icon: events, alt: "Events", route: ROUTES.EVENTS },
+  { label: "History", icon: history, alt: "History", route: ROUTES.HISTORY },
 ];
 
-export default function Sidebar() {
+interface SidebarProps {
+  user: User | null;
+  onSignOut: () => void;
+}
+
+export default function Sidebar({ user, onSignOut }: SidebarProps) {
   const router = useRouter();
   const [active, setActive] = useState<string>("Dashboard");
+  const initials = user?.name
+    ?.split(" ")
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase();
   return (
-    <div className="sideBarWrapper">
-      <div className="sideBarContainer">
-        <div className="sideBarTag">
-          <div className="smallText">ML</div>
-          <div>
-            <div className="smallText"> Matt Lau</div>
-            <div className="smallText">Undergrad (Scribe)</div>
+    <div className={styles.dashboardContainer}>
+      <div className={styles.titleContainer}>
+        <Image
+          className={styles.smallIcon}
+          src={smallIcon}
+          alt="Small Icon Here"
+        />
+        <div>
+          <div className={styles.title}>UDSM Outreach</div>
+          <div className={styles.subtitle}>Volunteer Portal</div>
+        </div>
+      </div>
+      <div className={styles.iconWrapper}>
+        <div className={styles.icon}>{initials}</div>
+      </div>
+      <div className={styles.userName}>{user?.name}</div>
+      <div className={styles.navBarContainer}>
+        {defaultNavBarItems.map((item) => (
+          <div
+            className={`${styles.navLabelContainer} ${active === item.label ? styles.navLabelContainerActive : ""}`}
+            key={item.label}
+            onClick={() => {
+              setActive(item.label);
+              router.push(item.route);
+            }}
+          >
+            <Image className={styles.navIcon} src={item.icon} alt={item.alt} />
+            <span className={styles.navLabel}>{item.label}</span>
           </div>
-        </div>
-        <div className="sideBarList">
-          {defaultNavBarItems.map((item) => (
-            <div
-              onClick={() => {
-                setActive(item.label);
-                router.push(item.route);
-              }}
-              key={item.label}
-              className="smallText"
-            >
-              <Image
-                className="dashboardIcons"
-                src={item.icon}
-                alt={item.alt}
-              />
-              <span className="navLabel">{item.label}</span>
-            </div>
-          ))}
-        </div>
+        ))}
+      </div>
+      <div className={styles.signOutWrapper} onClick={onSignOut}>
+        <Image
+          className={styles.signOutIcon}
+          src={signoutIcon}
+          alt="sign out"
+        />
+        <div className={styles.signOut}>Sign out</div>
       </div>
     </div>
   );

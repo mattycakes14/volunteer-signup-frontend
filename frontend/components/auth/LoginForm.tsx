@@ -7,6 +7,7 @@ import Button from "@/components/Button";
 import { signIn } from "@/lib/auth";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/lib/routes";
+import styles from "./Login.module.css";
 
 // image imports
 import Image from "next/image";
@@ -41,21 +42,21 @@ export default function LoginForm({ onToggle }: LoginFormProps) {
   }
 
   return (
-    <div className="loginContainer">
-      <Image className="iconLogo" src={smallIcon2} alt="small icon logo here" />
-      <div className="headerText">UDSM Outreach Portal</div>
-      <div className="headerDescription">
+    <div className={styles.loginContainer}>
+      <Image className={styles.iconLogo} src={smallIcon2} alt="small icon logo here" />
+      <div className={styles.headerText}>UDSM Outreach Portal</div>
+      <div className={styles.headerDescription}>
         Welcome back, please login to your account.
       </div>
       <form onSubmit={handleSubmit}>
-        <div className="inputContainer">
-          <label className="inputLabels" htmlFor="email">
+        <div className={styles.inputContainer}>
+          <label className={styles.inputLabels} htmlFor="email">
             Email address
           </label>
-          <div className="inputWrapper">
-            <Image className="inputIcons" src={emailIcon} alt="email icon" />
+          <div className={styles.inputWrapper}>
+            <Image className={styles.inputIcons} src={emailIcon} alt="email icon" />
             <input
-              className="inputBox"
+              className={styles.inputBox}
               id="email"
               type="email"
               value={email}
@@ -64,25 +65,25 @@ export default function LoginForm({ onToggle }: LoginFormProps) {
               placeholder="Enter your email"
             />
           </div>
-          <label className="inputLabels" htmlFor="password">
+          <label className={styles.inputLabels} htmlFor="password">
             Password
           </label>
 
-          <div className="inputWrapper">
+          <div className={styles.inputWrapper}>
             <Image
-              className="inputIcons"
+              className={styles.inputIcons}
               src={passwordIcon}
               alt="password icon"
             />
             <Button
-              className="visibility"
+              className={styles.visibility}
               type="button"
               onClick={() => setIsPasswordVisible(!isPasswordVisible)}
             >
               {isPasswordVisible ? <EyeOff /> : <Eye />}
             </Button>
             <input
-              className="inputBox"
+              className={styles.inputBox}
               id="password"
               type={isPasswordVisible ? "text" : "password"}
               value={password}
@@ -94,14 +95,14 @@ export default function LoginForm({ onToggle }: LoginFormProps) {
 
           {error && <p>{error.message}</p>}
 
-          <Button className="signInBox" type="submit" disabled={isLoading}>
+          <Button className={styles.signInBox} type="submit" disabled={isLoading}>
             {isLoading ? "Signing in..." : "Sign In"}
           </Button>
         </div>
 
-        <p className="bottomContent">
+        <p className={styles.bottomContent}>
           {"Don't have an account? "}
-          <Button className="signUpButton" type="button" onClick={onToggle}>
+          <Button className={styles.signUpButton} type="button" onClick={onToggle}>
             Sign up
           </Button>
         </p>
