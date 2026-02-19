@@ -179,6 +179,23 @@ Juniors don't need Phase 1 to be complete to build these. They are pure UI.
 | `components/admin/DataTable.tsx` — Generic reusable table (columns + data as props) | Junior |
 | All admin `page.tsx` files (new/, [id]/, archive) — Wire up forms and tables | Junior |
 
+### TODO — Upcoming Event Detail Modal
+Each `UpcomingEvents` card on the dashboard should have a "View Details" button that opens a modal popup with full event info.
+- Add a button to `UpcomingEvents.tsx` that triggers the modal
+- Create a new `EventDetailModal` component (e.g. `components/dashboard/EventDetailModal.tsx`)
+- Modal should display: site name, date, time range, location/address, role, status, and event notes
+- Pass all needed fields as props from `parsedEvents` — notes field is available on `signup.event.notes` but not currently extracted in the parsing step in `dashboard/page.tsx`, add it to `ParsedUpcomingEvent`
+- Use a `useState` boolean (`isOpen`) in `UpcomingEvents` to toggle the modal
+- Modal should be dismissible via a close button or clicking outside
+
+### TODO — Volunteer Dashboard Metrics
+The metric cards (Total Events, Upcoming Shifts, Volunteer Hours) are currently hardcoded. To make them accurate per-user:
+- **Total Events** and **Upcoming Shifts** are derivable from `event_signups` — no schema change needed.
+- **Volunteer Hours** = sum of `(end_time - start_time)` across all completed event signups for that user.
+  - Requires `events` table to have both `start_time` and `end_time` (or a `duration_minutes` field). Verify this exists in the backend schema — if only one datetime is stored, add a duration field.
+- Backend should expose these as computed values on `/users/{id}` or a dedicated `/users/{id}/stats` endpoint.
+- Frontend `metricCards` in `dashboard/page.tsx` should fetch and render live values instead of hardcoded numbers.
+
 ### Phase 5 — Polish & Edge Cases (lead dev)
 - Cancellation: disable cancel button if event < 12 hours away
 - Loading skeletons + error boundaries on all data-fetching pages

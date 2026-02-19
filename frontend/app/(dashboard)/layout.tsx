@@ -40,7 +40,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div style={{ display: "flex", minHeight: "100vh", background: "linear-gradient(135deg, #FCEBEF 0%, #F5FBFF 50%, #FFFFFF 100%)" }}>
       <Sidebar user={user} onSignOut={signOut} />
       <UserContext.Provider value={user}>
         {" "}

@@ -4,7 +4,7 @@
 // Junction table: connects users to events they've signed up for
 // Matches backend SignUpResponse / SignUpWithDetails / SignUpCreate / SignUpUpdate schemas
 
-import { Event } from './event';
+import { Event, EventWithDetails } from './event';
 import { User } from './user';
 
 /**
@@ -46,7 +46,7 @@ export type EventSignup = {
  */
 export type SignupWithDetails = EventSignup & {
   user?: User;
-  event?: Event;
+  event?: EventWithDetails;
 };
 
 /**

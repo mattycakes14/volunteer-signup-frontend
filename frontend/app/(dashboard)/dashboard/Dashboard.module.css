@@ -1,6 +1,18 @@
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .dashboardContainer {
   margin-top: 1.5rem;
   padding-top: 1rem;
+  animation: slideDown 0.4s ease;
 }
 
 .welcomeText {
@@ -15,4 +27,18 @@
   font-weight: 600;
   font-size: 1rem;
   color: #6b7280;
+}
+
+.metricContainer {
+  display: flex;
+  margin-top: 2.5rem;
+}
+
+.upcomingEvents {
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #1f2937;
 }
