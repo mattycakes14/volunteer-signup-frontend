@@ -10,8 +10,10 @@ interface MetricContainerProps {
 const MetricContainer = ({ title, image, metric }: MetricContainerProps) => {
   return (
     <div className={styles.metricContainer}>
-      <div className={styles.title}>{title}</div>
-      <div className={styles.metric}>{metric}</div>
+      <div>
+        <div className={styles.title}>{title}</div>
+        <div className={styles.metric}>{metric}</div>
+      </div>
       <Image className={styles.icon} src={image} alt={title} />
     </div>
   );
