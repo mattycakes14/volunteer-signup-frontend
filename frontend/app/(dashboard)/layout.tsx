@@ -5,11 +5,13 @@ import type { ReactNode } from "react";
 import { getSession, getAccessToken, getUserId, signOut } from "@/lib/auth";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/lib/routes";
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import type { User } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+export const UserContext = createContext<User | null>(null);
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
@@ -19,7 +21,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     const session = getSession();
 
     if (!session) {
-      router.push(ROUTES.HOME);
+      router.push(ROUTES.LOGIN);
       return;
     }
 
@@ -40,7 +42,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
       <Sidebar user={user} onSignOut={signOut} />
-      <main style={{ flex: 1 }}>{children}</main>
+      <UserContext.Provider value={user}>
+        {" "}
+        <main style={{ flex: 1 }}>{children}</main>
+      </UserContext.Provider>
     </div>
   );
 }
