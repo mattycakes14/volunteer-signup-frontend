@@ -18,6 +18,10 @@ import Button from "@/components/Button";
     return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });  
   }
 
+  const MAX_SCRIBES = 1;
+  const MAX_GRADUATES = 3;
+  const MAX_PRECEPTORS = 2;
+
   export default function EventCard({ event }: EventCardProps) {
     return (
       <div className={styles["event-card"]}>
@@ -27,18 +31,18 @@ import Button from "@/components/Button";
         <div className = {styles["event-card-location"]}>Seattle, WA</div>
         {event.notes && <div className={styles["event-card-notes"]}>{event.notes}</div>}
 
-        <div className={styles["capacity-section"]}>                                    
+        <div className={styles["capacity-section"]}>
           <div className={styles["capacity-row"]}>
-            <span>Scribe</span>                                                         
-            <span className={styles["capacity-badge"]}>0/2</span>                       
-          </div>                                                                        
-          <div className={styles["capacity-row"]}>                                      
+            <span>Scribe</span>
+            <span className={`${styles["capacity-badge"]} ${event.confirmed_scribes === MAX_SCRIBES ? styles["capacity-badge--full"] : ""}`}>{event.confirmed_scribes}/{MAX_SCRIBES}</span>
+          </div>
+          <div className={styles["capacity-row"]}>
             <span>Graduate</span>
-            <span className={styles["capacity-badge"]}>1/3</span>
+            <span className={`${styles["capacity-badge"]} ${event.confirmed_graduates === MAX_GRADUATES ? styles["capacity-badge--full"] : ""}`}>{event.confirmed_graduates}/{MAX_GRADUATES}</span>
           </div>
           <div className={styles["capacity-row"]}>
             <span>Preceptor</span>
-            <span className={styles["capacity-badge"]}>0/2</span>
+            <span className={`${styles["capacity-badge"]} ${event.confirmed_preceptors === MAX_PRECEPTORS ? styles["capacity-badge--full"] : ""}`}>{event.confirmed_preceptors}/{MAX_PRECEPTORS}</span>
           </div>
         </div>
 

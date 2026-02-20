@@ -1,0 +1,58 @@
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.upcomingDesc {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+.upcomingOutreach {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 1.875rem;
+  color: #4b2e83;
+  letter-spacing: -0.75px;
+}
+
+.eventContainer {
+  margin-top: 1.5rem;
+  margin-right: 2rem;
+}
+
+.eventsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.75rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  pointer-events: none;
+}
+
+.searchFilter {
+  border-radius: 9999px;
+  width: 260px;
+  height: 50px;
+  padding-left: 2.5rem;
+}
+
+.searchFilter::placeholder {
+  font-family: "Inter";
+  font-size: 0.8rem;
+  color: #9ca3af;
+}

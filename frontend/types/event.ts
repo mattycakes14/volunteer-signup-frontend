@@ -29,12 +29,15 @@ export type Event = {
 };
 
 /**
- * Event with related site info (for detailed views)
+ * Event with related site info and signup counts
  *
  * Matches backend EventWithDetails schema
  */
 export type EventWithDetails = Event & {
-  site?: Site; // Full site object (if joined)
+  site?: Site;
+  confirmed_scribes: number;
+  confirmed_graduates: number;
+  confirmed_preceptors: number;
 };
 
 /**
