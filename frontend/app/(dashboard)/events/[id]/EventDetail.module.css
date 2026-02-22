@@ -1,0 +1,58 @@
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mainContainer {
+  margin-top: 2.5rem;
+  animation: slideDown 0.4s ease;
+}
+
+.navigationContainer {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.navigate {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #64748b;
+  padding-right: 1.25rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.navigate .material-icons {
+  font-size: 1.1rem;
+}
+
+.slash {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #cbd5e1;
+  padding: 0 0.5rem;
+}
+
+.eventDetails {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #2d2a4a;
+  padding-left: 0.5rem;
+}
+
+.material-icons {
+  width: 1rem;
+  height: 1rem;
+}

@@ -42,7 +42,13 @@ export default function EventsPage() {
           </div>
         </div>
         <div className={styles.inputWrapper}>
-          <Image src="/search.png" alt="search" width={18} height={18} className={styles.searchIcon} />
+          <Image
+            src="/search.png"
+            alt="search"
+            width={18}
+            height={18}
+            className={styles.searchIcon}
+          />
           <input
             className={styles.searchFilter}
             placeholder="Search location..."

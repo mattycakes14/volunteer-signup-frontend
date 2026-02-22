@@ -1,0 +1,223 @@
+.mainContainer {
+  width: 620px;
+  height: fit-content;
+  padding: 2.5rem;
+  padding-bottom: 3rem;
+  border-radius: 2rem;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.firstContainer {
+  display: flex;
+  height: fit-content;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.titleSection {
+  width: 410px;
+  height: fit-content;
+}
+.descriptionSection {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1.125rem;
+  color: #64748b;
+}
+
+.date {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(234, 231, 231, 0.5);
+  width: 100px;
+  height: 100px;
+  border-radius: 3rem;
+}
+
+.date div {
+  padding-bottom: 0.15rem;
+}
+
+.month {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.day {
+  font-family: "League Spartan", sans-serif;
+  font-weight: 700;
+  font-size: 2.875rem;
+  color: #2d2a4a;
+}
+
+.year {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #475569;
+}
+
+.titleContainer {
+  font-family: "League Spartan", sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  letter-spacing: -0.075rem;
+  color: #2d2a4a;
+}
+
+.timePicture {
+  font-size: 1.25rem;
+  color: #2563eb;
+}
+
+.location {
+  font-size: 1.25rem;
+  color: #db2777;
+}
+
+.secondContainer {
+  width: 100%;
+}
+
+.timeContainer {
+  display: flex;
+  padding-right: 5rem;
+}
+
+.timeAndLocationWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.timeWrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background-color: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.dateAndTimeText {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #2d2a4a;
+}
+
+.actualDateAndTime {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  color: #475569;
+}
+
+.stardAndEnd {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.locationContainer {
+  display: flex;
+  margin-right: 2.5rem;
+}
+
+.locationText {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #2d2a4a;
+}
+
+.actualLocation {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  color: #475569;
+}
+
+.map {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  text-decoration: underline;
+  color: #2563eb;
+}
+
+.description {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  color: #475569;
+}
+
+.aboutThisEventTitle {
+  font-family: "League Spartan", sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #2d2a4a;
+  margin-bottom: 0.75rem;
+}
+
+.locationWrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background-color: #fdf2f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.prepareContainer {
+  width: 100%;
+  height: 220px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 3rem;
+  padding: 1.25rem;
+}
+
+.prepareContent {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #475569;
+}
+
+.prepareTitleContainer {
+  margin-right: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prepareTitle {
+  font-family: "League Spartan", sans-serif;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: #2d2a4a;
+}
+
+.actualPrepareIcon {
+  width: 20px;
+  height: 20px;
+  padding: 4px;
+  border-radius: 9999px;
+  background-color: #2d2a4a;
+  margin-right: 0.5rem;
+}
