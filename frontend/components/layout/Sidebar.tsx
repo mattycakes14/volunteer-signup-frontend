@@ -11,8 +11,7 @@ import history from "@/public/history.png";
 import settings from "@/public/settings.png";
 import signoutIcon from "@/public/signout.png";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ROUTES } from "@/lib/routes";
 import type { User } from "@/types";
 
@@ -29,7 +28,8 @@ interface SidebarProps {
 
 export default function Sidebar({ user, onSignOut }: SidebarProps) {
   const router = useRouter();
-  const [active, setActive] = useState<string>("Dashboard");
+  const pathname = usePathname();
+  const active = defaultNavBarItems.find((item) => pathname.startsWith(item.route))?.label ?? "";
   const initials = user?.name
     ?.split(" ")
     .map((w) => w[0])
@@ -58,7 +58,6 @@ export default function Sidebar({ user, onSignOut }: SidebarProps) {
             className={`${styles.navLabelContainer} ${active === item.label ? styles.navLabelContainerActive : ""}`}
             key={item.label}
             onClick={() => {
-              setActive(item.label);
               router.push(item.route);
             }}
           >

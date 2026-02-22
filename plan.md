@@ -196,6 +196,75 @@ The metric cards (Total Events, Upcoming Shifts, Volunteer Hours) are currently 
 - Backend should expose these as computed values on `/users/{id}` or a dedicated `/users/{id}/stats` endpoint.
 - Frontend `metricCards` in `dashboard/page.tsx` should fetch and render live values instead of hardcoded numbers.
 
+### TODO — API Call Optimization (reduce redundant fetches on mount)
+
+Currently all data fetching is done in `useEffect` on component mount, which re-fires on every navigation. Three strategies, in order of preference:
+
+#### Option A: SWR (recommended)
+Install `swr` — lightweight, drop-in replacement for `useEffect` fetch patterns.
+
+```bash
+npm install swr
+```
+
+Replace `useEffect` + `useState` fetch blocks with `useSWR`:
+```ts
+import useSWR from "swr";
+const fetcher = (url: string) => api.get(url);
+
+// Before:
+const [events, setEvents] = useState([]);
+useEffect(() => { api.get("/events/signup-counts").then(setEvents); }, []);
+
+// After:
+const { data: events, error, isLoading } = useSWR("/events/signup-counts", fetcher);
+```
+
+- Same URL key = one request even if component mounts twice
+- Cache survives navigation between pages within the session
+- Revalidates in background on window focus (configurable via `SWRConfig`)
+
+#### Option B: Module-level cache (no new dependencies)
+A plain JS `Map` outside React persists across mounts within a browser session. Create `lib/cache.ts`:
+```ts
+const cache = new Map<string, { data: unknown; ts: number }>();
+const TTL = 5 * 60 * 1000; // 5 minutes
+
+export function getCached<T>(key: string): T | null {
+  const entry = cache.get(key);
+  if (!entry) return null;
+  if (Date.now() - entry.ts > TTL) { cache.delete(key); return null; }
+  return entry.data as T;
+}
+
+export function setCached(key: string, data: unknown) {
+  cache.set(key, { data, ts: Date.now() });
+}
+```
+
+Then in `useEffect`, check cache before fetching:
+```ts
+const cached = getCached<EventWithDetails[]>("/events/signup-counts");
+if (cached) { setEvents(cached); setLoading(false); return; }
+const data = await api.get<EventWithDetails[]>("/events/signup-counts");
+setCached("/events/signup-counts", data);
+setEvents(data);
+```
+
+#### Option C: Lift shared data into Context (already used for `user`)
+For data needed by multiple sibling pages, fetch once in the layout and distribute via Context — the same pattern used for `UserContext` in `(dashboard)/layout.tsx`. Best for data that every page in a group needs.
+
+#### Current hot spots (highest priority to fix)
+| File | Fires on | Calls |
+|---|---|---|
+| `(dashboard)/layout.tsx` | Every page load | `GET /users/{id}` |
+| `dashboard/page.tsx` | `/dashboard` mount | `GET /event-signups/me/upcoming` + `GET /event-signups/me/completed-count` |
+| `events/page.tsx` | `/events` mount | `GET /events/signup-counts` |
+
+The `user` fetch in layout is highest priority — it fires on every single page navigation.
+
+---
+
 ### Phase 5 — Polish & Edge Cases (lead dev)
 - Cancellation: disable cancel button if event < 12 hours away
 - Loading skeletons + error boundaries on all data-fetching pages
