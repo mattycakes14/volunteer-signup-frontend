@@ -17,6 +17,7 @@
 .navigationContainer {
   display: flex;
   margin-bottom: 2rem;
+  align-items: center;
 }
 
 .navigate {
@@ -55,4 +56,8 @@
 .material-icons {
   width: 1rem;
   height: 1rem;
+}
+
+.subContainer {
+  display: flex;
 }

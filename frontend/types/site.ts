@@ -16,6 +16,7 @@ export type Site = {
   description: string;           // What volunteers will do
   contacts: string;              // Site coordinator contact info
   frequency: string;             // How often events occur (e.g., "Weekly", "Monthly")
+  preparation_notes?: string;    // Optional preparation instructions for volunteers
   created_at: string;
   updated_at: string;
 };

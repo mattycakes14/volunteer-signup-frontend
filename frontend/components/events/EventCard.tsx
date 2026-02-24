@@ -34,7 +34,7 @@ export default function EventCard({ event }: EventCardProps) {
         {formatDate(event.date)} • {formatTime(event.start_time)} -{" "}
         {formatTime(event.end_time)}
       </div>
-      <div className={styles["event-card-location"]}>Seattle, WA</div>
+      <div className={styles["event-card-location"]}>{event.site?.address}</div>
       {event.notes && (
         <div className={styles["event-card-notes"]}>{event.notes}</div>
       )}

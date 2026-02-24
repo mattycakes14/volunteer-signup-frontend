@@ -8,7 +8,8 @@ import { api } from "@/lib/api";
 import { EventWithDetails } from "@/types";
 import EventDetails from "@/components/events/EventDetails";
 import Link from "next/link";
-
+import Map from "@/components/events/Map";
+import VolunteerRoles from "@/components/events/VolunteerRoles";
 
 export default function EventDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -42,7 +43,13 @@ export default function EventDetailPage() {
         <div className={styles.slash}>/</div>
         <div className={styles.eventDetails}>Event Details</div>
       </div>
-      <EventDetails event={event} />
+      <div className={styles.subContainer}>
+        <EventDetails event={event} />
+        <div className={styles.mapAndVolunteerWrapper}>
+          <Map location={event.site?.address} />
+          <VolunteerRoles sites={event.site} event={event} />
+        </div>
+      </div>
     </div>
   );
 }

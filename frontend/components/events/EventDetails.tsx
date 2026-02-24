@@ -26,6 +26,7 @@ function parseDate(dateStr: string) {
 
 const EventDetails = ({ event }: EventDetailsProps) => {
   const { month, day, year, weekday } = parseDate(event.date);
+  const contacts = event.site?.contacts.split(",");
 
   return (
     <div className={styles.mainContainer}>
@@ -36,8 +37,12 @@ const EventDetails = ({ event }: EventDetailsProps) => {
             {event.site?.frequency}
           </div>
           <div className={styles.descriptionSection}>
-            {" "}
-            {event.site?.contacts}
+            <div className={styles.contactsTitle}>Contacts</div>
+            <ul className={styles.contactsList}>
+              {contacts?.map((contact, i) => (
+                <li key={i}>{contact.trim()}</li>
+              ))}
+            </ul>
           </div>
         </div>
         <div className={styles.date}>
@@ -94,7 +99,9 @@ const EventDetails = ({ event }: EventDetailsProps) => {
               How to Prepare/ Rules & Requirements
             </div>
           </div>
-          <div className={styles.prepareContent}>Test TEst</div>
+          <div className={styles.prepareContent}>
+            {event.site?.preparation_notes}
+          </div>
         </div>
       </div>
     </div>

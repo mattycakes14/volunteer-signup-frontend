@@ -1,4 +1,5 @@
 .mainContainer {
+  margin-right: 2rem;
   width: 620px;
   height: fit-content;
   padding: 2.5rem;
@@ -7,6 +8,7 @@
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
 }
 
 .firstContainer {
@@ -21,11 +23,30 @@
   width: 410px;
   height: fit-content;
 }
+
 .descriptionSection {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 1.125rem;
   color: #64748b;
+}
+
+.contactsTitle {
+  font-family: "League Spartan", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #2d2a4a;
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.contactsList {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #64748b;
+  padding-left: 1.25rem;
+  margin: 0;
 }
 
 .date {
@@ -70,6 +91,7 @@
   font-size: 3rem;
   letter-spacing: -0.075rem;
   color: #2d2a4a;
+  margin-bottom: 0.5rem;
 }
 
 .timePicture {
@@ -88,7 +110,7 @@
 
 .timeContainer {
   display: flex;
-  padding-right: 5rem;
+  flex: 1;
 }
 
 .timeAndLocationWrapper {
@@ -133,7 +155,7 @@
 
 .locationContainer {
   display: flex;
-  margin-right: 2.5rem;
+  flex: 1;
 }
 
 .locationText {
@@ -156,6 +178,7 @@
   font-size: 0.875rem;
   text-decoration: underline;
   color: #2563eb;
+  cursor: pointer;
 }
 
 .description {
@@ -165,6 +188,9 @@
   color: #475569;
 }
 
+.thirdContainer {
+  margin-bottom: 2rem;
+}
 .aboutThisEventTitle {
   font-family: "League Spartan", sans-serif;
   font-weight: 700;
@@ -186,7 +212,7 @@
 
 .prepareContainer {
   width: 100%;
-  height: 220px;
+  height: fit-content;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 3rem;
   padding: 1.25rem;
