@@ -29,6 +29,10 @@ export default function EventsPage() {
     }
     fetchData();
   }, []);
+
+  const filteredEvents = events.filter((event) =>
+    event.site?.name?.toLowerCase().includes(search.toLowerCase()),
+  );
   if (loading) return <div>Loading events...</div>;
   if (error) return <div>{error}</div>;
 
@@ -51,14 +55,14 @@ export default function EventsPage() {
           />
           <input
             className={styles.searchFilter}
-            placeholder="Search location..."
+            placeholder="Search event..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       </div>
       <div className={styles.eventsGrid}>
-        {events.map((event) => (
+        {filteredEvents.map((event) => (
           <EventCard key={event.id} event={event} />
         ))}
       </div>
