@@ -11,16 +11,24 @@ import { getUserId } from "@/lib/auth";
 export default function HistoryPage() {
   const [events, setEvents] = useState<SignupWithDetails[]>([]);
   const [totalEvents, setTotalEvents] = useState(0);
+  const [totalHours, setTotalHours] = useState(0);
+
   useEffect(() => {
-    const getTotalCounts = async () => {
-      const userId = getUserId();
-      const response = await api.get<SignupWithDetails[]>(
-        `/event-signups/user/${userId}`,
-      );
+    const userId = getUserId();
+
+    async function fetchSignups() {
+      const response = await api.get<SignupWithDetails[]>(`/event-signups/user/${userId}`);
       setEvents(response);
       setTotalEvents(response.length);
-    };
-    getTotalCounts();
+    }
+
+    async function fetchTotalHours() {
+      const data = await api.get<{ user_id: string; total_hours: number }>(`/users/${userId}/volunteer-hours`);
+      if (typeof data?.total_hours === "number") setTotalHours(data.total_hours);
+    }
+
+    fetchSignups();
+    fetchTotalHours();
   }, []);
   return (
     <div className={styles.mainContainer}>
@@ -41,7 +49,7 @@ export default function HistoryPage() {
         <div className={styles.hours}>
           <div className={styles.hoursTitleBox}>
             <div className={styles.hoursText}>TOTAL HOURS</div>
-            <div className={styles.numericHour}>48.5</div>
+            <div className={styles.numericHour}>{totalHours}</div>
           </div>
           <div className={styles.clockContainer}>
             <Clock />

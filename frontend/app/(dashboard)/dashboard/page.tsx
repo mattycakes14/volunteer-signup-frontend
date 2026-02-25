@@ -11,7 +11,8 @@ import volunteer from "@/public/volunteer.png";
 // user prop being passed from layout
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/app/(dashboard)/layout";
-import { getAccessToken } from "@/lib/auth";
+import { getUserId } from "@/lib/auth";
+import { api } from "@/lib/api";
 import type { SignupWithDetails } from "@/types/event-signup";
 
 type ParsedUpcomingEvent = {
@@ -34,30 +35,27 @@ function formatTime(time: string): string {
   return `${hour}:${min} ${period}`;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-
 export default function DashboardPage() {
   const user = useContext(UserContext);
   const [upcomingEvents, setUpcomingEvents] = useState<SignupWithDetails[]>([]);
   const [parsedEvents, setParsedEvents] = useState<ParsedUpcomingEvent[]>([]);
   const [totalEvents, setTotalEvents] = useState<number>(0);
   const [upcomingShifts, setUpcomingShifts] = useState<number>(0);
+  const [totalHours, setTotalHours] = useState<number>(0);
 
-  // TODO: this is hardcoded, query the number of signups by user (total events), the number of signups where status is upcoming (upcoming shifts)
-  // Volunteer hour logic needs db schema changes
   const metricCards = [
     { title: "Total Events", image: eventDashboard, metric: totalEvents },
     { title: "Upcoming Shifts", image: shifts, metric: upcomingShifts },
-    { title: "Volunteer Hours", image: volunteer, metric: 48.5 },
+    { title: "Volunteer Hours", image: volunteer, metric: totalHours },
   ];
+
   useEffect(() => {
-    const token = getAccessToken();
+    const userId = getUserId();
 
     async function fetchUpcomingEvents() {
-      const res = await fetch(`${API_URL}/event-signups/me/upcoming`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await res.json();
+      const data = await api.get<SignupWithDetails[]>(
+        "/event-signups/me/upcoming",
+      );
 
       if (!Array.isArray(data)) return;
 
@@ -90,15 +88,23 @@ export default function DashboardPage() {
     }
 
     async function fetchCompletedCount() {
-      const res = await fetch(`${API_URL}/event-signups/me/completed-count`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await res.json();
+      const data = await api.get<{ count: number }>(
+        "/event-signups/me/completed-count",
+      );
       if (typeof data?.count === "number") setTotalEvents(data.count);
+    }
+
+    async function fetchTotalHours() {
+      const data = await api.get<{ user_id: string; total_hours: number }>(
+        `/users/${userId}/volunteer-hours`,
+      );
+      if (typeof data?.total_hours === "number")
+        setTotalHours(data.total_hours);
     }
 
     fetchUpcomingEvents();
     fetchCompletedCount();
+    fetchTotalHours();
   }, []);
 
   return (
