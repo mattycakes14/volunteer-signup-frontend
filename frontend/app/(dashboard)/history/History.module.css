@@ -1,0 +1,108 @@
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mainContainer {
+  padding: 4rem;
+  animation: slideDown 0.4s ease;
+}
+
+.volunteerTitle {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 2.25rem;
+  color: #0f172a;
+  letter-spacing: -0.9px;
+}
+
+.volunteerDesc {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  color: #475569;
+}
+
+.eventsAndHoursContainer {
+  display: flex;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.events {
+  height: 140px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 3rem;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hours {
+  height: 140px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 3rem;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.eventsText {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #64748b;
+  letter-spacing: 0.7px;
+}
+
+.hoursText {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #64748b;
+  letter-spacing: 0.7px;
+}
+
+.numericEvent {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  color: #1c0582;
+}
+
+.numericHour {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  color: #1c0582;
+}
+
+.calendarContainer {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  background-color: #dbeafe;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1d4ed8;
+}
+
+.clockContainer {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  background-color: #f3e8ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1d4ed8;
+}

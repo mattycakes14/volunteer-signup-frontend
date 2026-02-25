@@ -1,0 +1,77 @@
+.mainContainer {
+  background-color: #ffffff;
+  width: 100%;
+  height: fit-content;
+  margin-top: 3rem;
+  border-radius: 3rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.pastEvents {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #1e293b;
+  margin-left: 2rem;
+}
+
+.headerTitle {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #64748b;
+  letter-spacing: 0.7px;
+  padding: 1.5rem;
+}
+
+.siteName {
+  padding: 1.5rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: #0f172a;
+}
+
+.eventDate {
+  padding: 1.5rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #334155;
+}
+
+.role,
+.status {
+  padding: 1.5rem;
+}
+
+.rolePill {
+  display: inline-block;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #4338ca;
+  background-color: #eef2ff;
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+}
+
+.statusPill {
+  display: inline-block;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #059669;
+  background-color: #ecfdf5;
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+}
+
+.hours {
+  padding: 1.5rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #1e293b;
+}
