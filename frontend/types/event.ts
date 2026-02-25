@@ -38,6 +38,8 @@ export type EventWithDetails = Event & {
   confirmed_scribes: number;
   confirmed_graduates: number;
   confirmed_preceptors: number;
+  confirmed_outreach_managers: number;
+  confirmed_dental_students: number;
 };
 
 /**
