@@ -112,3 +112,196 @@
   padding: 0.25rem 0.65rem;
   border-radius: 9999px;
 }
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(210, 205, 240, 0.4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.confirmButton {
+  flex: 2;
+  background: #FFF0F0;
+  color: #2D1B69;
+
+}
+
+.cancelLink {
+  flex: 1;
+}
+
+.modalContent {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.85);
+  width: 100%;
+  max-width: 450px;
+  padding: 2rem;
+  border-radius: 24px;
+  position: relative;
+  box-shadow:
+    0 8px 32px 0 rgba(31, 38, 135, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.closeX {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #999;
+  cursor: pointer;
+}
+
+.modalTitle {
+  color: #2D1B69;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+.eventCard {
+  background: rgba(255, 255, 255, 0.3);
+  /* Semi-transparent white/blue */
+  backdrop-filter: blur(12px);
+  /* The "glossy" effect */
+  -webkit-backdrop-filter: blur(12px);
+  /* For Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  /* Subtle "shine" on the edge */
+  padding: 1rem;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+}
+
+.eventTitle {
+  color: #2D1B69;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.eventMeta {
+  display: flex;
+  gap: 15px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.sectionLabel {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: #7f6bcf;
+  letter-spacing: 1.25px;
+  margin-bottom: 1rem;
+}
+
+.roleOption {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 2px solid #F0F0F0;
+  border-radius: 16px;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.roleText {
+  color: #2D1B69;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.selectedRole {
+  border-color: #2D1B69;
+  background: #FAF9FF;
+}
+
+.hiddenRadio {
+  display: none;
+}
+
+.customRadio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #DDD;
+  border-radius: 50%;
+  margin-right: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.selectedRole .customRadio {
+  border-color: #2D1B69;
+  background-color: #2D1B69;
+}
+
+.selectedRole .customRadio::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.infoBox {
+  display: flex;
+  gap: 10px;
+  background: #F4F4F9;
+  padding: 1rem;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.confirmButton {
+  width: 100%;
+  background: #FFF0F0;
+  color: #2D1B69;
+  border: none;
+  padding: 1rem;
+  border-radius: 50px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.cancelLink {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-weight: 600;
+}
