@@ -21,11 +21,15 @@ function formatDate(dateStr: string) {
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
-const MAX_SCRIBES = 1;
-const MAX_GRADUATES = 3;
-const MAX_PRECEPTORS = 2;
-
 export default function EventCard({ event }: EventCardProps) {
+  const roles = [
+    { label: "Scribe",            max: 1, confirmed: event.confirmed_scribes },
+    { label: "Graduate",          max: 3, confirmed: event.confirmed_graduates },
+    { label: "Preceptor",         max: 2, confirmed: event.confirmed_preceptors },
+    { label: "Dental Student",    max: 1, confirmed: event.confirmed_dental_students },
+    { label: "Outreach Manager",  max: 1, confirmed: event.confirmed_outreach_managers },
+  ];
+
   return (
     <div className={styles["event-card"]}>
       <div className={styles["event-card-status"]}>{event.status}</div>
@@ -40,30 +44,16 @@ export default function EventCard({ event }: EventCardProps) {
       )}
 
       <div className={styles["capacity-section"]}>
-        <div className={styles["capacity-row"]}>
-          <span>Scribe</span>
-          <span
-            className={`${styles["capacity-badge"]} ${event.confirmed_scribes === MAX_SCRIBES ? styles["capacity-badge--full"] : ""}`}
-          >
-            {event.confirmed_scribes}/{MAX_SCRIBES}
-          </span>
-        </div>
-        <div className={styles["capacity-row"]}>
-          <span>Graduate</span>
-          <span
-            className={`${styles["capacity-badge"]} ${event.confirmed_graduates === MAX_GRADUATES ? styles["capacity-badge--full"] : ""}`}
-          >
-            {event.confirmed_graduates}/{MAX_GRADUATES}
-          </span>
-        </div>
-        <div className={styles["capacity-row"]}>
-          <span>Preceptor</span>
-          <span
-            className={`${styles["capacity-badge"]} ${event.confirmed_preceptors === MAX_PRECEPTORS ? styles["capacity-badge--full"] : ""}`}
-          >
-            {event.confirmed_preceptors}/{MAX_PRECEPTORS}
-          </span>
-        </div>
+        {roles.map(({ label, max, confirmed }) => (
+          <div key={label} className={styles["capacity-row"]}>
+            <span>{label}</span>
+            <span
+              className={`${styles["capacity-badge"]} ${confirmed === max ? styles["capacity-badge--full"] : ""}`}
+            >
+              {confirmed}/{max}
+            </span>
+          </div>
+        ))}
       </div>
 
       <Link href={`/events/${event.id}`} className={styles["card-footer"]}>
