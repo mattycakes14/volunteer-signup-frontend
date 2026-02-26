@@ -8,6 +8,16 @@ import { getAccessToken, refreshAccessToken } from "./auth";
 
 const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
+export class ApiError extends Error {
+  constructor(
+    message: string,
+    public status: number,
+  ) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
+
 // ============================================================================
 // CORE FETCH WRAPPER
 // ============================================================================
@@ -29,6 +39,9 @@ async function apiFetch<T>(
     };
 
     let res = await fetch(`${API_URL}${endpoint}`, config);
+
+    console.log(res);
+    console.log(res.ok);
 
     // If 401 (token expired), refresh and retry ONCE
     if (res.status === 401) {
@@ -52,11 +65,12 @@ async function apiFetch<T>(
     // Handle HTTP errors
     if (!res.ok) {
       const error = await res.json().catch(() => ({}));
-      throw new Error(
+      throw new ApiError(
         error.detail ||
           error.error ||
           error.message ||
           `Request failed with status ${res.status}`,
+        res.status,
       );
     }
 

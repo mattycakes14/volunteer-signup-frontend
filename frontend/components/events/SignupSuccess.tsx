@@ -2,21 +2,45 @@
 
 import styles from "@/components/events/SignupSuccess.module.css";
 import { EventSignup, EventWithDetails } from "@/types";
+import { X } from "lucide-react";
 
 const SignupSuccess = ({
   signup,
   event,
   onClose,
+  isMaxedOut,
 }: {
   signup: EventSignup;
   event: EventWithDetails;
   onClose: () => void;
+  isMaxedOut: boolean;
 }) => {
-  const isWaitlisted = signup.status === "waitlist";
+  const isWaitlisted = signup?.status === "waitlist";
+
+  console.log(isMaxedOut);
+
+  if (isMaxedOut) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.iconWrapperRed}>
+          <X size={28} color="#dc2626" strokeWidth={3} />
+        </div>
+        <h2 className={styles.heading}>Signup limit reached</h2>
+        <p className={styles.subheading}>
+          You have reached the maximum of 2 signups across all outreach sites.
+        </p>
+        <button className={styles.doneButton} onClick={onClose}>
+          Done
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
-      <div className={isWaitlisted ? styles.iconWrapperGrey : styles.iconWrapper}>
+      <div
+        className={isWaitlisted ? styles.iconWrapperGrey : styles.iconWrapper}
+      >
         <span className={isWaitlisted ? styles.hourglass : styles.checkmark}>
           {isWaitlisted ? "⏳" : "✓"}
         </span>

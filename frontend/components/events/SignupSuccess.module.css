@@ -21,6 +21,17 @@
   margin-bottom: 1.25rem;
 }
 
+.iconWrapperRed {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #fee2e2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
 .checkmark {
   font-size: 1.75rem;
   color: #15803d;
