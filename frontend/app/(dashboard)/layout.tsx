@@ -8,6 +8,7 @@ import { ROUTES } from "@/lib/routes";
 import { useEffect, useState, createContext } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import type { User } from "@/types";
+import { UserRole } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -34,7 +35,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       });
       const data = await res.json();
       setUser(data);
-      console.log(data);
+      if (data.role === UserRole.ADMIN) {
+        router.push(ROUTES.ADMIN.ROOT);
+      }
     }
     fetchUser();
   }, []);
