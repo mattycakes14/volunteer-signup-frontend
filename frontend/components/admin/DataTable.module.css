@@ -1,0 +1,71 @@
+.mainContainer {
+  background-color: rgba(255, 255, 255, 0.65);
+  border-radius: 2rem;
+  padding: 2rem;
+  width: 100%;
+  margin-top: 2.5rem;
+}
+
+.recentSignUpsText {
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #0f172a;
+}
+
+.volunteersSignUpText {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+
+.name {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #0f172a;
+}
+
+.role {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #475569;
+}
+
+.tableCell {
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+  padding-right: 5rem;
+}
+
+.status {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 0.75rem;
+  color: #166534;
+  background-color: #dcfce7;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  display: inline-block;
+}
+
+.event {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #475569;
+}
+
+.tableHeader {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.6px;
+  color: #94a3b8;
+  padding-bottom: 1rem;
+  padding-top: 0.5rem;
+  padding-right: 5rem;
+}
