@@ -1,0 +1,150 @@
+.mainContainer {
+  width: 100%;
+  height: fit-content;
+  margin-top: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 2rem;
+  box-shadow: 0px 8px 32px 0px rgba(31, 38, 135, 0.05);
+}
+
+.headerSection {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tableHeader {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.6px;
+  color: #1c0582;
+  padding: 0.75rem 1.5rem;
+}
+
+.tableCell {
+  padding: 0.75rem 1.5rem;
+}
+
+.tableRow {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tableRow td {
+  padding: 0.75rem 1.5rem;
+}
+
+.siteName {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #1e293b;
+}
+
+.dateContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.date {
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #334155;
+}
+
+.time {
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #64748b;
+}
+
+.upcoming,
+.completed,
+.canceled {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.upcoming {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+}
+
+.completed {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+
+.canceled {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.address {
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #475569;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.editIcon {
+  color: #475569;
+  cursor: pointer;
+}
+
+.editIcon:hover {
+  color: #1d4ed8;
+}
+
+.deleteIcon {
+  color: #475569;
+  cursor: pointer;
+}
+
+.deleteIcon:hover {
+  color: #dc2626;
+}
+
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.75rem;
+  color: #64748b;
+}
+
+.searchBar {
+  padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  outline: none;
+  width: 20rem;
+}
+
+.searchBar::placeholder {
+  color: #94a3b8;
+}
+
+.searchBar:focus {
+  border-color: #1c0582;
+}

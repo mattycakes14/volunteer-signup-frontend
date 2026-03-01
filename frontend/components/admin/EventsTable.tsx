@@ -1,0 +1,121 @@
+"use client";
+import { useEffect, useState } from "react";
+import styles from "@/components/admin/EventsTable.module.css";
+import { Search, Pencil, Trash2 } from "lucide-react";
+import { api } from "@/lib/api";
+import type { EventWithSite } from "@/types";
+import DeleteModal from "@/components/admin/DeleteModal";
+import Toast from "@/components/admin/Toast";
+
+const formatDate = (date: string) => {
+  const [year, month, day] = date.split("-").map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+};
+
+const formatTime = (time: string) => {
+  const [hourStr, minute] = time.split(":");
+  const hour = parseInt(hourStr);
+  const period = hour >= 12 ? "PM" : "AM";
+  const hour12 = hour % 12 || 12;
+  return `${hour12}:${minute} ${period}`;
+};
+
+const EventsTable = () => {
+  const [events, setEvents] = useState<EventWithSite[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [eventId, setEventId] = useState("");
+  const [showToast, setShowToast] = useState(false);
+
+  const deleteEvent = async (eventId: string) => {
+    try {
+      await api.delete(`/events/${eventId}`);
+      setEvents((prev) => prev.filter((e) => e.id !== eventId));
+      setIsDeleteOpen(false);
+      setShowToast(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const data = await api.get("/events/with-sites");
+        setEvents(data);
+      } catch (err) {
+        setError((err as Error).message);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  const filteredEvents = events.filter((item) =>
+    item.site.name.toLowerCase().includes(search.toLowerCase()),
+  );
+
+  return (
+    <div className={styles.mainContainer}>
+      <div className={styles.headerSection}>
+        <div className={styles.searchWrapper}>
+          <Search size={16} className={styles.searchIcon} />
+          <input
+            className={styles.searchBar}
+            placeholder="Search by event name"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th className={styles.tableHeader}>SITE NAME</th>
+            <th className={styles.tableHeader}>DATE & TIME</th>
+            <th className={styles.tableHeader}>STATUS</th>
+            <th className={styles.tableHeader}>LOCATION</th>
+            <th className={styles.tableHeader}>ACTIONS</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredEvents.map((item, index) => (
+            <tr key={index} className={styles.tableRow}>
+              <td className={styles.siteName}>{item.site.name}</td>
+              <td className={styles.dateContainer}>
+                <span className={styles.date}>{formatDate(item.date)}</span>
+                <span className={styles.time}>
+                  {formatTime(item.start_time)}–{formatTime(item.end_time)}
+                </span>
+              </td>
+              <td>
+                <span className={styles[item.status]}>{item.status}</span>
+              </td>
+              <td className={styles.address}>{item.site.address}</td>
+              <td className={styles.actions}>
+                <Pencil size={16} className={styles.editIcon} />
+                <Trash2
+                  onClick={() => {
+                    setIsDeleteOpen(true);
+                    setEventId(item.id);
+                  }}
+                  size={16}
+                  className={styles.deleteIcon}
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {isDeleteOpen && <DeleteModal onConfirm={deleteEvent} onCancel={() => setIsDeleteOpen(false)} eventId={eventId} />}
+      {showToast && <Toast message="Event deleted successfully" onClose={() => setShowToast(false)} />}
+    </div>
+  );
+};
+
+export default EventsTable;

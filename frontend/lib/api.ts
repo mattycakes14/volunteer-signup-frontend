@@ -74,7 +74,10 @@ async function apiFetch<T>(
       );
     }
 
-    // Return typed response
+    // Return typed response (204 No Content has no body)
+    if (res.status === 204 || res.headers.get("content-length") === "0") {
+      return undefined as T;
+    }
     return await res.json();
   } catch (error) {
     if (error instanceof Error) {

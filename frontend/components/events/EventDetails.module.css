@@ -1,6 +1,6 @@
 .mainContainer {
   margin-right: 2rem;
-  width: 620px;
+  max-width: 620px;
   height: fit-content;
   padding: 2.5rem;
   padding-bottom: 3rem;
@@ -20,7 +20,7 @@
 }
 
 .titleSection {
-  width: 410px;
+  max-width: 410px;
   height: fit-content;
 }
 

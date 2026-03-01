@@ -29,6 +29,15 @@ export type Event = {
 };
 
 /**
+ * Event with related site info (no signup counts)
+ *
+ * Matches backend response from /events endpoint
+ */
+export type EventWithSite = Event & {
+  site: Site;
+};
+
+/**
  * Event with related site info and signup counts
  *
  * Matches backend EventWithDetails schema

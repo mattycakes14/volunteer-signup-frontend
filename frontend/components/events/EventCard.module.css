@@ -8,7 +8,7 @@
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease;
-  width: 300px;
+  max-width: 300px;
   height: fit-content;
 }
 
