@@ -12,14 +12,15 @@ import settings from "@/public/settings.png";
 import signoutIcon from "@/public/signout.png";
 
 import { usePathname, useRouter } from "next/navigation";
+import {
+  LayoutDashboard,
+  Calendar,
+  CalendarDays,
+  MapPin,
+  Archive,
+} from "lucide-react";
 import { ROUTES } from "@/lib/routes";
 import type { User } from "@/types";
-
-const defaultNavBarItems = [
-  { label: "Dashboard", icon: dashboard, alt: "Home", route: ROUTES.DASHBOARD },
-  { label: "Browse Events", icon: events, alt: "Events", route: ROUTES.EVENTS },
-  { label: "History", icon: history, alt: "History", route: ROUTES.HISTORY },
-];
 
 interface SidebarProps {
   user: User | null;
@@ -27,9 +28,55 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ user, onSignOut }: SidebarProps) {
+  const defaultNavBarItems = [
+    {
+      label: "Dashboard",
+      icon: dashboard,
+      alt: "Home",
+      route: ROUTES.DASHBOARD,
+    },
+    {
+      label: "Browse Events",
+      icon: events,
+      alt: "Events",
+      route: ROUTES.EVENTS,
+    },
+    { label: "History", icon: history, alt: "History", route: ROUTES.HISTORY },
+  ];
+
+  const adminNavBarItems = [
+    {
+      id: 1,
+      label: "DASHBOARD",
+      items: [
+        { name: "Overview", icon: LayoutDashboard, route: ROUTES.ADMIN.ROOT },
+      ],
+    },
+    {
+      id: 2,
+      label: "VOLUNTEER",
+      items: [{ name: "Browse Events", icon: Calendar, route: ROUTES.EVENTS }],
+    },
+    {
+      id: 3,
+      label: "ADMINISTRATION",
+      items: [
+        {
+          name: "Manage Events",
+          icon: CalendarDays,
+          route: ROUTES.ADMIN.EVENTS,
+        },
+        { name: "Manage Sites", icon: MapPin, route: ROUTES.ADMIN.SITES },
+        { name: "Archive", icon: Archive, route: ROUTES.HISTORY },
+      ],
+    },
+  ];
   const router = useRouter();
   const pathname = usePathname();
-  const active = defaultNavBarItems.find((item) => pathname.startsWith(item.route))?.label ?? "";
+  const isAdmin = user?.role === "admin";
+  const active =
+    defaultNavBarItems.find((item) => pathname.startsWith(item.route))?.label ??
+    "";
   const initials = user?.name
     ?.split(" ")
     .map((w) => w[0])
@@ -45,7 +92,9 @@ export default function Sidebar({ user, onSignOut }: SidebarProps) {
         />
         <div>
           <div className={styles.title}>UDSM Outreach</div>
-          <div className={styles.subtitle}>Volunteer Portal</div>
+          <div className={styles.subtitle}>
+            {isAdmin ? "Admin Portal" : "Volunteer Portal"}
+          </div>
         </div>
       </div>
       <div className={styles.iconWrapper}>
@@ -53,18 +102,41 @@ export default function Sidebar({ user, onSignOut }: SidebarProps) {
       </div>
       <div className={styles.userName}>{user?.name}</div>
       <div className={styles.navBarContainer}>
-        {defaultNavBarItems.map((item) => (
-          <div
-            className={`${styles.navLabelContainer} ${active === item.label ? styles.navLabelContainerActive : ""}`}
-            key={item.label}
-            onClick={() => {
-              router.push(item.route);
-            }}
-          >
-            <Image className={styles.navIcon} src={item.icon} alt={item.alt} />
-            <span className={styles.navLabel}>{item.label}</span>
-          </div>
-        ))}
+        {isAdmin
+          ? adminNavBarItems.map((item) => (
+              <div key={item.id} className={styles.wholeContainer}>
+                <div className={styles.subnavLabel}>{item.label}</div>
+                {item.items.map((navItem, index) => {
+                  const Icon = navItem.icon;
+                  return (
+                    <div
+                      key={index}
+                      className={styles.subNavContainer}
+                      onClick={() => router.push(navItem.route)}
+                    >
+                      <Icon size={16} color="#94A3B8" />
+                      <span className={styles.labelName}>{navItem.name}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            ))
+          : defaultNavBarItems.map((item) => (
+              <div
+                className={`${styles.navLabelContainer} ${active === item.label ? styles.navLabelContainerActive : ""}`}
+                key={item.label}
+                onClick={() => {
+                  router.push(item.route);
+                }}
+              >
+                <Image
+                  className={styles.navIcon}
+                  src={item.icon}
+                  alt={item.alt}
+                />
+                <span className={styles.navLabel}>{item.label}</span>
+              </div>
+            ))}
       </div>
       <div className={styles.signOutWrapper} onClick={onSignOut}>
         <Image

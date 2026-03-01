@@ -1,0 +1,72 @@
+.mainContainer {
+  padding: 3rem;
+}
+
+.adminDashboardWrapper {
+  display: flex;
+}
+
+.admin {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-right: 0.5rem;
+}
+
+.dashboard {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #1e293b;
+}
+
+.overview {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 1.875rem;
+  color: #0f172a;
+  letter-spacing: -0.75px;
+}
+
+.eventsAndSignupWrapper {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.upcomingEvents {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(221, 214, 254, 0.2) 100%);
+  border-radius: 2rem;
+  width: 100%;
+  padding: 1.5rem;
+}
+
+.icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #000000;
+}
+
+.eventCountText,
+.signUpCountText {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #64748b;
+}
+
+.signupCount,
+.eventCount {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 2.25rem;
+  color: #0f172a;
+}
+
+.totalSignUps {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(221, 214, 254, 0.2) 100%);
+  border-radius: 2rem;
+  width: 100%;
+  padding: 1.5rem;
+}
