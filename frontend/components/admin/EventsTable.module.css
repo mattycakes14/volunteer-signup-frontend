@@ -148,3 +148,12 @@
 .searchBar:focus {
   border-color: #1c0582;
 }
+
+.metricsIcon {
+  color: #475569;
+  cursor: pointer;
+}
+
+.metricsIcon:hover {
+  color: #16a34a;
+}
