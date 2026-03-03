@@ -1,11 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import styles from "@/components/admin/EventsTable.module.css";
-import { Search, Pencil, Trash2 } from "lucide-react";
+import { Search, Pencil, Trash2, File } from "lucide-react";
 import { api } from "@/lib/api";
-import type { EventWithSite } from "@/types";
+import type { EventWithSite, EventMetrics } from "@/types";
 import DeleteModal from "@/components/admin/DeleteModal";
 import Toast from "@/components/admin/Toast";
+import MetricsForm from "@/components/admin/MetricsForm";
 
 const formatDate = (date: string) => {
   const [year, month, day] = date.split("-").map(Number);
@@ -29,8 +30,14 @@ const EventsTable = () => {
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [eventId, setEventId] = useState("");
+  const [selectedEvent, setSelectedEvent] = useState<EventWithSite | null>(
+    null,
+  );
   const [showToast, setShowToast] = useState(false);
+  const [isMetricsOpen, setIsMetricsOpen] = useState(false);
+  const [existingMetrics, setExistingMetrics] = useState<EventMetrics | null>(
+    null,
+  );
 
   const deleteEvent = async (eventId: string) => {
     try {
@@ -40,6 +47,47 @@ const EventsTable = () => {
       setShowToast(true);
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const fetchMetrics = async (eventId: string) => {
+    try {
+      const data = await api.get(`/event-metrics/by-event/${eventId}`);
+      return data ?? null;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  };
+
+  const saveMetrics = async (
+    eventId: string,
+    peopleServed: number,
+    numberOfGrad: number,
+    totalServiceHours: number,
+    notes: string,
+  ): Promise<boolean> => {
+    try {
+      if (existingMetrics) {
+        await api.patch(`/event-metrics/${existingMetrics.id}`, {
+          people_served: peopleServed,
+          number_of_grad: numberOfGrad,
+          total_service_hours: totalServiceHours,
+          notes: notes,
+        });
+      } else {
+        await api.post("/event-metrics", {
+          event_id: eventId,
+          people_served: peopleServed,
+          number_of_grad: numberOfGrad,
+          total_service_hours: totalServiceHours,
+          notes: notes,
+        });
+      }
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
     }
   };
 
@@ -102,18 +150,49 @@ const EventsTable = () => {
                 <Trash2
                   onClick={() => {
                     setIsDeleteOpen(true);
-                    setEventId(item.id);
+                    setSelectedEvent(item);
                   }}
                   size={16}
                   className={styles.deleteIcon}
+                />
+                <File
+                  onClick={async () => {
+                    const metrics = await fetchMetrics(item.id);
+                    setExistingMetrics(metrics);
+                    console.log(existingMetrics);
+                    setSelectedEvent(item);
+                    setIsMetricsOpen(true);
+                  }}
+                  size={16}
+                  className={styles.metricsIcon}
                 />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      {isDeleteOpen && <DeleteModal onConfirm={deleteEvent} onCancel={() => setIsDeleteOpen(false)} eventId={eventId} />}
-      {showToast && <Toast message="Event deleted successfully" onClose={() => setShowToast(false)} />}
+      {isDeleteOpen && (
+        <DeleteModal
+          onConfirm={deleteEvent}
+          onCancel={() => setIsDeleteOpen(false)}
+          eventId={selectedEvent?.id ?? ""}
+        />
+      )}
+      {isMetricsOpen && selectedEvent && (
+        <MetricsForm
+          key={selectedEvent.id}
+          onCancel={() => setIsMetricsOpen(false)}
+          onConfirm={saveMetrics}
+          event={selectedEvent}
+          existingMetrics={existingMetrics}
+        />
+      )}
+      {showToast && (
+        <Toast
+          message="Event deleted successfully"
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </div>
   );
 };
