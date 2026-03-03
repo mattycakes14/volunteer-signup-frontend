@@ -1,12 +1,13 @@
 "use client";
-
 import style from "@/app/(dashboard)/admin/events/Events.module.css";
-import { Plus } from "lucide-react";
 import EventsTable from "@/components/admin/EventsTable";
 import MetricsForm from "@/components/admin/MetricsForm";
+import CreateEventButton from "@/components/admin/CreateEventButton";
+
 
 // Admin event list — manage all events (edit/delete)
 export default function AdminEventsPage() {
+
   return (
     <div className={style.mainContainer}>
       <div className={style.firstSection}>
@@ -16,10 +17,7 @@ export default function AdminEventsPage() {
             Manage schedules, sites, and volunteer allocation
           </div>
         </div>
-        <div className={style.createNewButton}>
-          <Plus size={18} />
-          Create New Event
-        </div>
+        <CreateEventButton />
       </div>
       <EventsTable />
     </div>
