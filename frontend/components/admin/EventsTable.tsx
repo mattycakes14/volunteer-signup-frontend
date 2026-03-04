@@ -4,9 +4,11 @@ import styles from "@/components/admin/EventsTable.module.css";
 import { Search, Pencil, Trash2, File } from "lucide-react";
 import { api } from "@/lib/api";
 import type { EventWithSite, EventMetrics } from "@/types";
+import { EventWithSite } from "@/types";
 import DeleteModal from "@/components/admin/DeleteModal";
 import Toast from "@/components/admin/Toast";
 import MetricsForm from "@/components/admin/MetricsForm";
+
 
 const formatDate = (date: string) => {
   const [year, month, day] = date.split("-").map(Number);
@@ -94,7 +96,7 @@ const EventsTable = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const data = await api.get("/events/with-sites");
+        const data = await api.get<EventWithSite[]>("/events/with-sites");
         setEvents(data);
       } catch (err) {
         setError((err as Error).message);
