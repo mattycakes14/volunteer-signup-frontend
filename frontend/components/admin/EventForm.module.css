@@ -1,0 +1,203 @@
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page {
+  padding: 40px;
+  min-height: 100vh;
+  color: #F8F8F5
+}
+
+/*Remove clocks from inputs*/
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* Remove native calendar*/
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.pageContainer {
+  /* Animation to slide down*/
+  animation: slideDown 0.4s ease;
+  color: black;
+  background: #FFFFFF;
+  border-radius: 32px;
+  box-shadow: 0px 8px 32px 0px rgba(31, 38, 135, 0.15);
+  max-width: 800px;
+  /* Center card */
+  margin: 0 auto;
+}
+
+.dashboardLink {
+  color: #6b7280;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.875rem;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.dashboardLink:hover {
+  color: #111827;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.inputIcon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #6b7280;
+}
+
+.header {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.header::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: #E5E7EB;
+  margin-top: 8px;
+}
+
+.section::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: #E5E7EB;
+  margin-top: 8px;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.header p {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.field {
+  /* Have labels above input fields */
+  display: flex;
+  flex-direction: column;
+  /* Spacing between label and input */
+  gap: 8px;
+}
+
+.field label {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #374151;
+  padding-left: 4px;
+}
+
+.field input,
+.field select,
+.field textarea {
+  padding: 0.875rem;
+  padding-left: 36px;
+  border: 1px solid #111827;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  border-radius: 9999px;
+  width: 100%;
+}
+
+.field textarea {
+  min-height: 120px;
+  resize: vertical;
+  border-radius: 20px;
+}
+
+.timesRow {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+}
+
+/* Descendant selector for only the event date, start and end fields */
+.timesRow .field {
+  flex: 1;
+}
+
+/* Structural selector for only the first child*/
+.timesRow .field:first-child {
+  flex: 2;
+}
+
+.section {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section h2 {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px;
+}
+
+.cancelButton {
+  background: none;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 9999px;
+  color: #4B5563;
+  cursor: pointer;
+  font-weight: 500;
+  font: inter;
+}
+
+.cancelButton:hover {
+  color: #111827;
+}
+
+.submitButton {
+  background: #1c0582;
+  border: none;
+  padding: .75rem 2rem;
+  border-radius: 9999px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  align-items: center;
+}
