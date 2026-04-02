@@ -18,7 +18,11 @@
       "Bash(git add:*)",
       "WebSearch",
       "WebFetch(domain:organic-copy-393653.framer.app)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "mcp__github__get_me",
+      "mcp__github__search_repositories",
+      "Bash(gh api:*)",
+      "Bash(git clone:*)"
     ]
   }
 }
