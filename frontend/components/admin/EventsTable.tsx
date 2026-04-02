@@ -8,7 +8,8 @@ import { EventWithSite } from "@/types";
 import DeleteModal from "@/components/admin/DeleteModal";
 import Toast from "@/components/admin/Toast";
 import MetricsForm from "@/components/admin/MetricsForm";
-
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@/lib/routes";
 
 const formatDate = (date: string) => {
   const [year, month, day] = date.split("-").map(Number);
@@ -40,6 +41,7 @@ const EventsTable = () => {
   const [existingMetrics, setExistingMetrics] = useState<EventMetrics | null>(
     null,
   );
+  const router = useRouter();
 
   const deleteEvent = async (eventId: string) => {
     try {
@@ -148,7 +150,11 @@ const EventsTable = () => {
               </td>
               <td className={styles.address}>{item.site.address}</td>
               <td className={styles.actions}>
-                <Pencil size={16} className={styles.editIcon} />
+                <Pencil
+                  size={16}
+                  className={styles.editIcon}
+                  onClick={() => router.push(ROUTES.ADMIN.EDIT_EVENT(item.id))}
+                />
                 <Trash2
                   onClick={() => {
                     setIsDeleteOpen(true);
