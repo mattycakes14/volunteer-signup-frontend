@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
-import { EventWithDetails } from "@/types";
+import { EventWithDetails, EventSignup } from "@/types";
 import EventCard from "@/components/events/EventCard";
 import Image from "next/image";
 import styles from "@/app/(dashboard)/events/Events.module.css";
@@ -13,14 +13,23 @@ export default function EventsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
+  const [signedUpEventIds, setSignedUpEventIds] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const eventsData = await api.get<EventWithDetails[]>(
-          "/events/signup-counts",
-        );
+        const [eventsData, signups] = await Promise.all([
+          api.get<EventWithDetails[]>("/events/signup-counts"),
+          api.get<EventSignup[]>("/event-signups/me/upcoming"),
+        ]);
         setEvents(eventsData);
+        setSignedUpEventIds(
+          new Set(
+            signups
+              .filter((s) => s.status !== "cancelled")
+              .map((s) => s.event_id)
+          )
+        );
       } catch (err) {
         setError(err instanceof Error ? err.message : "Failed to load events");
       } finally {
@@ -63,7 +72,7 @@ export default function EventsPage() {
       </div>
       <div className={styles.eventsGrid}>
         {filteredEvents.map((event) => (
-          <EventCard key={event.id} event={event} />
+          <EventCard key={event.id} event={event} isSignedUp={signedUpEventIds.has(event.id)} />
         ))}
       </div>
     </div>

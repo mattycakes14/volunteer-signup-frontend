@@ -6,6 +6,7 @@ import Link from "next/link";
 
 interface EventCardProps {
   event: EventWithDetails;
+  isSignedUp?: boolean;
 }
 
 function formatTime(timeStr: string) {
@@ -21,7 +22,7 @@ function formatDate(dateStr: string) {
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
-export default function EventCard({ event }: EventCardProps) {
+export default function EventCard({ event, isSignedUp }: EventCardProps) {
   const roles = [
     { label: "Scribe",            max: 1, confirmed: event.confirmed_scribes },
     { label: "Graduate",          max: 3, confirmed: event.confirmed_graduates },
@@ -57,7 +58,9 @@ export default function EventCard({ event }: EventCardProps) {
       </div>
 
       <Link href={`/events/${event.id}`} className={styles["card-footer"]}>
-        <Button className={styles["signup-btn"]}>Sign Up →</Button>
+        <Button className={isSignedUp ? styles["signed-up-btn"] : styles["signup-btn"]}>
+          {isSignedUp ? "Signed Up ✓" : "Sign Up →"}
+        </Button>
       </Link>
     </div>
   );
