@@ -4,18 +4,30 @@ import { useEffect } from "react";
 import { ROUTES } from "@/lib/routes";
 import type { ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import { getSession } from "@/lib/auth";
+import { getSession, getUserId } from "@/lib/auth";
+import type { User } from "@/types";
 import { UserRole } from "@/types";
 import { api } from "@/lib/api";
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
-  // TODO: Re-enable session guard once auth flow is working
+
   useEffect(() => {
     const session = getSession();
     if (!session) {
-      router.push(ROUTES.DASHBOARD); // push to /dashboard which checks session and pushes to /login
+      router.push(ROUTES.DASHBOARD);
+      return;
     }
+
+    async function checkAdmin() {
+      const userId = getUserId();
+      const user = await api.get<User>(`/users/${userId}`);
+      if (user.role !== UserRole.ADMIN) {
+        router.push(ROUTES.DASHBOARD);
+      }
+    }
+    checkAdmin();
   }, []);
+
   return <>{children}</>;
 }
